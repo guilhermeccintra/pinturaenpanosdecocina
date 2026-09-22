@@ -1,3 +1,9 @@
+/*
+   CSS LIMPO - Pintura em Pano de Prato
+   Revisado: limpeza de classes sem uso confirmado.
+   Mantidos: tracking, classes de carrossel, estados JS e responsividade.
+*/
+
 /* ==========================================================================
    Variáveis e Tokens de Design (Design Tokens)
    ========================================================================== */
@@ -104,6 +110,26 @@ body {
 
 }
 
+
+/* ==========================================================
+   PROTEÇÃO GLOBAL CONTRA OVERFLOW HORIZONTAL
+========================================================== */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+
 img {
   display: block;
 
@@ -198,20 +224,16 @@ section {
 
 .section-subtitle {
   max-width: 620px;
-
   font-family: var(--font-body);
-
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.45;
-
   color: var(--color-text-light);
 }
 
 .section-subtitle strong {
   font-weight: 700;
-
-  color: var(--color-text-light);
+  color: var(--color-text);
 }
 
 .text-center {
@@ -260,6 +282,7 @@ section {
   }
 
   .section-subtitle {
+    font-size: 16px;
     width: 100%;
     max-width: 100%;
   }
@@ -302,38 +325,6 @@ section {
   transform: translateY(-2px);
 
   box-shadow: var(--shadow-md);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  padding: 16px 36px;
-
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-lg);
-
-  background-color: transparent;
-
-  color: var(--color-primary);
-
-  font-family: var(--font-body);
-
-  font-size: 1rem;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-primary);
-
-  color: var(--color-white);
 }
 
 .btn-large {
@@ -416,107 +407,157 @@ section {
 }
 
 .hero-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+  display: block;
 
   width: 100%;
+  max-width: 1000px;
 
-  margin: 0 auto 5px;
+  margin: 0 auto 16px;
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(
+      2rem,
+      3.8vw,
+      3.5rem
+    );
+
+  font-weight: 700;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.025em;
 
   text-align: center;
+
+  color: var(--color-text);
+
 }
+
+
+/* ==========================================================
+   SUBHEADLINE PREMIUM DO HERO
+   ========================================================== */
+
+.hero-title-eyebrow {
+
+    display:block;
+
+    width:100%;
+
+    font-family: var(--font-body);
+
+    font-style: italic;
+
+    font-size:24px;
+
+    font-weight:400;
+
+    letter-spacing:0;
+
+    text-transform:none;
+
+    color:var(--color-text-light);
+
+    line-height:1.5;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================================
+   Hero Eyebrow — Mobile
+========================================================================== */
+
+@media(max-width:768px){
+
+    .hero-title-eyebrow {
+
+        width:100%;
+
+        max-width:300px;
+
+        margin:0 auto 0;
+
+        padding:0;
+
+        font-size:16px;
+
+        font-style:italic;
+
+        font-weight:400;
+
+        letter-spacing:0;
+
+        line-height:1.4;
+
+        white-space:normal;
+
+        text-align:center;
+
+    }
+
+}
+
 
 .hero-title-main {
   display: block;
 
   width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto 7px;
 
   font-family: var(--font-display);
 
-  font-size: clamp(2rem, 4.2vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1.05;
+  font-size:
+    clamp(
+      2.2rem,
+      4.5vw,
+      3.4rem
+    );
 
-  letter-spacing: -0.025em;
+  font-weight: 700;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.035em;
 
   color: var(--color-text);
 
   text-transform: none;
-}
-
-.hero-title-accent {
-  color: #C4784A;
-}
-
-.hero-title-sub {
-  display: block;
-
-  width: 100%;
-
-  margin-top: 0;
-
-  font-family: var(--font-display);
-
-  font-size: clamp(1.25rem, 2.4vw, 1.9rem);
-  font-weight: 500;
-  line-height: 1.2;
-
-  letter-spacing: 0.01em;
-
-  color: var(--color-text);
 }
 
 .hero-title-script {
   display: block;
-
   width: 100%;
-
   margin-top: 0;
   margin-left: 0;
-
+  margin-bottom:7px;
   font-family: var(--font-script);
-
-  font-size: clamp(2.35rem, 5vw, 4.3rem);
-  font-weight: 700;
+  font-size:
+clamp(
+2.8rem,
+6vw,
+4.8rem
+);
+  font-weight: 800;
   line-height: 1;
-
   color: var(--color-primary);
-
   text-transform: none;
-
   vertical-align: baseline;
 }
 
-.hero-subtitle {
-  width: 100%;
-  max-width: 760px;
-
-  margin: 0 auto;
-
-  font-family: var(--font-body);
-
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.45;
-
-  text-align: center;
-
-  color: var(--color-text-light);
-}
-
-.hero-subtitle strong {
-  font-weight: 700;
-
-  color: var(--color-text-light);
-}
 
 .hero-price {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 6px;
+
 }
 
 .hero-buttons {
@@ -536,7 +577,7 @@ section {
 
   width: 100%;
   max-width: 430px;
-  min-height: 64px;
+  min-height: 80px;
 
   padding: 16px 28px;
 
@@ -598,73 +639,91 @@ section {
 
   .hero-title {
     width: 100%;
-    margin: 0 auto 5px;
+    margin: 0 auto 12px;
   }
 
+ 
   .hero-title-main {
-    width: 100%;
-    max-width: 100%;
+
+    width: calc(100% + 16px);
+
+    max-width: none;
+
+    margin-left: -8px;
 
     font-size:
-      clamp(
-        1.8rem,
-        8vw,
-        2.35rem
-      );
-
-    line-height: 1.08;
-
-    letter-spacing: -0.02em;
-  }
-
-  .hero-title-sub {
-    width: 100%;
-
-    margin-top: 0;
-
-    font-size:
-      clamp(
-        1.05rem,
-        4.8vw,
-        1.4rem
-      );
+clamp(
+    1.3rem,
+    5.2vw,
+    2rem
+);
 
     line-height: 1.2;
-  }
+
+    letter-spacing: -0.02em;
+
+    margin-bottom:5px;
+
+}
+
+.hero-title-sub {
+
+    width:100%;
+    font-size:
+    clamp(
+        1.4rem,
+        6vw,
+        2rem
+    );
+
+    line-height:1.2;
+
+}
+
+
+   .hero-title-accent {
+
+    font-size:1.15em;
+
+}
+
+   
 
   .hero-title-script {
     width: 100%;
-
     margin-top: 0;
     margin-left: 0;
-
+   margin-bottom:5px;
     font-size:
       clamp(
         2.25rem,
         10vw,
         3rem
       );
-
     line-height: 1;
   }
 
-  .hero-subtitle {
+    .hero-subtitle {
     width: 100%;
     max-width: 100%;
-
-    margin: 0 auto;
-
     font-size: 16px;
-    line-height: 1.5;
+    font-weight: 500;
+    line-height: 1.45;
 
     text-align: center;
   }
+
+  .hero-subtitle strong {
+    font-weight: 700;
+
+    color: var(--color-text);
+  }
+   
 
   .hero-price {
     flex-direction: column;
     align-items: center;
 
-    gap: 5px;
   }
 
   .hero-buttons {
@@ -674,7 +733,7 @@ section {
   .hero-buttons .btn-primary {
     width: 100%;
     max-width: 400px;
-    min-height: 60px;
+    min-height: 75px;
 
     padding:
       15px
@@ -965,8 +1024,98 @@ section {
   background: var(--color-white);
 }
 
-.bonuses-dark .bonus-icon {
-  color: var(--color-primary);
+
+/* ==========================================================
+   CTA INTERMEDIÁRIO — APÓS OS BÔNUS
+========================================================== */
+
+.bonuses-cta {
+    width: min(100%, 620px);
+    margin: 32px auto 0;
+    padding: 24px 20px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 14px 34px
+        rgba(28, 17, 10, 0.18);
+}
+
+
+/* TEXTO DE VALOR NO LUGAR DO PREÇO */
+
+.bonuses-cta-text {
+
+    max-width: 520px;
+    margin: 0 auto 25px;
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+
+.bonuses-cta-text strong {
+
+    font-weight: 700;
+
+}
+
+
+/* Mantém o botão centralizado */
+.bonuses-cta .hero-buttons {
+
+    width: 100%;
+
+}
+
+
+/* Texto inferior */
+.bonuses-cta .hero-info {
+
+    margin-top: 10px;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+
+    .bonuses-cta {
+
+        width: 100%;
+
+        margin-top: 26px;
+
+        padding:
+            20px
+            14px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .bonuses-cta-text {
+
+        font-size: 15px;
+
+        line-height: 1.5;
+
+        margin-bottom: 22px;
+
+    }
+
+
 }
 
 
@@ -1009,11 +1158,9 @@ section {
 
 .comparison-carousel {
   position: relative;
-
   width: 100%;
   max-width: 100%;
-
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
 .comparison-viewport {
@@ -1393,169 +1540,6 @@ section {
 
 
 /* ==========================================================================
-   Benefício da comparação
-   ========================================================================== */
-
-.comparison-benefit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-
-  width: min(100%, 690px);
-
-  box-sizing: border-box;
-
-  margin: 30px auto 0;
-
-  padding: 18px 22px;
-
-  border: 1px solid rgba(196, 120, 74, 0.22);
-  border-radius: 16px;
-
-  background-color: #fff8f1;
-
-  text-align: left;
-}
-
-.comparison-benefit-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 38px;
-
-  width: 38px;
-  height: 38px;
-
-  border-radius: 50%;
-
-  background-color: var(--color-primary);
-
-  font-size: 20px;
-  font-weight: 800;
-
-  color: #ffffff;
-}
-
-.comparison-benefit-text {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-
-  font-family: var(--font-body);
-
-  color: var(--color-text);
-}
-
-.comparison-benefit-text strong {
-  font-size: 16px;
-  line-height: 1.3;
-}
-
-.comparison-benefit-text span {
-  font-size: 14px;
-  line-height: 1.45;
-
-  color: #75665c;
-}
-
-
-/* ==========================================================================
-   Tags da comparação
-   ========================================================================== */
-
-.comparison-tags {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-
-  width: min(100%, 960px);
-
-  margin: 24px auto 0;
-
-  text-align: center;
-}
-
-.comparison-tags span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 34px;
-
-  box-sizing: border-box;
-
-  padding: 8px 14px;
-
-  border: 1px solid rgba(196, 120, 74, 0.28);
-  border-radius: 999px;
-
-  background-color: #ffffff;
-
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1;
-
-  color: #71584a;
-}
-
-
-/* ==========================================================================
-   CTA da comparação
-   ========================================================================== */
-
-.comparison-cta {
-  width: 100%;
-
-  margin-top: 32px;
-
-  text-align: center;
-}
-
-.comparison-cta-highlight {
-  max-width: 620px;
-
-  margin: 0 auto 18px;
-
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.45;
-
-  text-align: center;
-
-  color: var(--color-primary);
-}
-
-.comparison-cta .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto;
-
-  text-align: center;
-}
-
-.comparison-payment-info {
-  margin: 13px auto 0;
-
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-
-  text-align: center;
-
-  color: #7a6d62;
-}
-
-
-/* ==========================================================================
    Comparação — Tablet
    ========================================================================== */
 
@@ -1571,6 +1555,7 @@ section {
 
   .comparison-carousel {
     max-width: 100%;
+    margin: 0 auto;
   }
 
   .comparison-before {
@@ -1726,7 +1711,7 @@ section {
 .transfer-process {
   position: relative;
   overflow: hidden;
-
+  background: var(--color-bg);
   padding: 48px 20px;
 }
 
@@ -1967,7 +1952,7 @@ section {
   display: flex;
   align-items: flex-start;
   gap: 15px;
-
+  background-color: var(--color-white);
   width: min(100%, 780px);
 
   margin: 38px auto 0;
@@ -1977,11 +1962,7 @@ section {
   border:
     1px solid
     rgba(196, 120, 74, 0.27);
-
   border-radius: 18px;
-
-  background-color: #fff8f1;
-
   box-shadow:
     0 11px 30px
     rgba(71, 47, 31, 0.07);
@@ -2032,53 +2013,6 @@ section {
   line-height: 1.55;
 
   color: #75665c;
-}
-
-
-/* ==========================================================================
-   CTA do processo
-   ========================================================================== */
-
-.transfer-process-cta {
-  margin-top: 34px;
-
-  text-align: center;
-}
-
-.transfer-process-highlight {
-  max-width: 620px;
-
-  margin: 0 auto 18px;
-
-  font-family:
-    var(--font-body);
-
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.45;
-
-  color: var(--color-primary);
-}
-
-.transfer-process-cta .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-}
-
-.transfer-process-payment {
-  margin: 13px auto 0;
-
-  font-family:
-    var(--font-body);
-
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-
-  color: #7a6d62;
 }
 
 
@@ -2526,113 +2460,6 @@ section {
   font-weight: 800;
 
   color: #ffffff;
-}
-
-
-/* ==========================================================================
-   CTA da garantia
-   ========================================================================== */
-
-.guarantee-cta {
-  margin-top: 29px;
-}
-
-.guarantee-cta .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-}
-
-.guarantee-payment-info {
-  margin: 13px 0 0;
-
-  font-family:
-    var(--font-body);
-
-  font-size: 13px;
-  font-weight: 500;
-
-  color: #7a6d62;
-}
-
-
-/* ==========================================================================
-   Recursos secundários da garantia
-   ========================================================================== */
-
-.guarantee-features {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  width: min(100%, 1050px);
-
-  margin: 28px auto 0;
-
-  gap: 14px;
-}
-
-.guarantee-feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-
-  min-width: 0;
-
-  padding: 18px 16px;
-
-  border:
-    1px solid
-    rgba(196, 120, 74, 0.18);
-
-  border-radius: 16px;
-
-  background-color: #ffffff;
-}
-
-.guarantee-feature-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex: 0 0 39px;
-
-  width: 39px;
-  height: 39px;
-
-  border-radius: 50%;
-
-  background-color: #fff1e5;
-
-  color: var(--color-primary);
-}
-
-.guarantee-feature h3 {
-  margin: 0 0 5px;
-
-  font-family:
-    var(--font-display);
-
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.3;
-
-  color: var(--color-text);
-}
-
-.guarantee-feature p {
-  margin: 0;
-
-  font-family:
-    var(--font-body);
-
-  font-size: 14px;
-  line-height: 1.5;
-
-  color: #75665c;
 }
 
 
@@ -3206,18 +3033,12 @@ section {
 .hero-benefits {
   display: flex;
   flex-direction: column;
-
   width: fit-content;
   max-width: 620px;
-
-  margin: 0 auto 32px;
-
+  margin: 25px auto 25px;
   padding: 0;
-
   gap: 16px;
-
   list-style: none;
-
   text-align: left;
 }
 
@@ -3240,7 +3061,7 @@ section {
   font-family:
     var(--font-body);
 
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.45;
 
@@ -3267,8 +3088,10 @@ section {
 
   border-radius: 50%;
 
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1;
+  box-shadow: 0 3px 10px rgba(28, 17, 10, 0.10);
+
 }
 
 .hero-benefits .benefit-text {
@@ -3287,9 +3110,7 @@ section {
 
 .hero-benefits strong {
   font-weight: 700;
-
-  color:
-    var(--color-text-light);
+  color: var(--color-text);
 }
 
 
@@ -3310,13 +3131,9 @@ section {
   .hero-benefits {
     width: 100%;
     max-width: 440px;
-
-    margin: 0 auto 20px;
-
     padding: 0;
-
+   margin: 15px auto 25px;
     gap: 14px;
-
     box-sizing: border-box;
   }
 
@@ -3334,8 +3151,7 @@ section {
     width: 36px;
     height: 36px;
     min-width: 36px;
-
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 
@@ -3513,99 +3329,343 @@ section {
 
 
 /* ==========================================================================
-   Avaliação do Hero
-   ========================================================================== */
+   HERO RATING - Barra de prova social
+========================================================================== */
 
 .hero-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  gap: 9px;
+    display:flex;
 
-  width: 100%;
+    align-items:center;
 
-  margin: 0 auto 20px;
+    justify-content:center;
 
-  padding: 0 16px;
 
-  line-height: 1;
+    gap:12px;
 
-  text-align: center;
-}
 
-.hero-rating__stars {
-  display: flex;
-  align-items: center;
+    width:max-content;
 
-  gap: 4px;
+    max-width:calc(100% - 32px);
 
-  font-size: 22px;
-  line-height: 1;
 
-  color: #f5b800;
+    margin:0 auto 16px;
 
-  text-shadow:
-    0 1px 1px
-    rgba(95, 62, 36, 0.12);
-}
 
-.hero-rating__text {
-  display: flex;
-  align-items: center;
+    padding:8px 18px;
 
-  gap: 5px;
 
-  margin: 0;
+    background:#ffffff;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
 
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.3;
+    border-radius:50px;
 
-  color:
-    var(--color-text-light);
-}
 
-.hero-rating__text strong {
-  font-weight: 700;
+    box-sizing:border-box;
+
+
+    box-shadow:
+        0 2px 10px rgba(96,69,50,0.06);
+
+
 }
 
 
 /* ==========================================================================
-   Avaliação do Hero — Mobile
-   ========================================================================== */
+   AVATARES
+========================================================================== */
 
-@media (max-width: 600px) {
 
-  .hero-rating {
-    flex-wrap: wrap;
+.hero-rating__avatars {
 
-    gap: 7px;
+    display:flex;
 
-    /*
-     * O rating não precisa de 16px extras
-     * de cada lado no mobile.
-     */
-    padding-right: 4px;
-    padding-left: 4px;
-  }
+    align-items:center;
 
-  .hero-rating__stars {
-    gap: 3px;
+    flex-shrink:0;
 
-    font-size: 12px;
-  }
-
-  .hero-rating__text {
-    font-size: 11px;
-  }
 }
 
+
+.hero-rating__avatars img {
+
+
+    width:34px;
+
+    height:34px;
+
+
+    object-fit:cover;
+
+
+    border-radius:50%;
+
+
+    border:2px solid #fff;
+
+
+    margin-left:-9px;
+
+
+    box-shadow:
+        0 1px 4px rgba(0,0,0,.12);
+
+
+}
+
+
+.hero-rating__avatars img:first-child {
+
+    margin-left:0;
+
+}
+
+
+/* ==========================================================================
+   CONTEÚDO
+========================================================================== */
+
+
+.hero-rating__content {
+
+    display:flex;
+
+    align-items:center;
+
+
+    gap:8px;
+
+
+}
+
+
+/* ==========================================================================
+   ESTRELAS
+========================================================================== */
+
+
+.hero-rating__stars {
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:1px;
+
+
+    font-size:17px;
+
+
+    line-height:1;
+
+
+    color:#F5B800;
+
+
+}
+
+
+/* ==========================================================================
+   TEXTO
+========================================================================== */
+
+
+.hero-rating__text {
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:5px;
+
+
+    margin:0;
+
+
+    font-family:Georgia,
+    "Times New Roman",
+    serif;
+
+
+    color:#604532;
+
+
+    font-size:13px;
+
+
+    line-height:1.2;
+
+
+}
+
+
+.hero-rating__text strong {
+
+
+    font-size:15px;
+
+
+    font-weight:700;
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
+
+
+@media(max-width:600px){
+
+
+.hero-rating {
+
+
+    width:auto;
+
+
+    max-width:calc(100% - 32px);
+
+
+    gap:7px;
+
+
+    padding:6px 12px;
+
+
+    margin-bottom:12px;
+
+
+}
+
+
+.hero-rating__avatars img {
+
+
+    width:24px;
+
+    height:24px;
+
+
+    margin-left:-7px;
+
+
+}
+
+
+.hero-rating__stars {
+
+
+    font-size:13px;
+
+
+}
+
+
+.hero-rating__content {
+
+
+    gap:5px;
+
+
+}
+
+
+.hero-rating__text {
+
+
+    flex-direction:row;
+
+
+    align-items:center;
+
+
+    gap:4px;
+
+
+    font-size:9px;
+
+
+    white-space:nowrap;
+
+
+}
+
+
+.hero-rating__text strong {
+
+
+    font-size:12px;
+
+
+}
+
+
+}
+
+
+/* ==========================================================================
+   MOBILE PEQUENO
+========================================================================== */
+
+
+@media(max-width:380px){
+
+
+.hero-rating {
+
+
+    padding:6px 10px;
+
+}
+
+
+.hero-rating__avatars img {
+
+
+    width:22px;
+
+    height:22px;
+
+
+}
+
+
+.hero-rating__stars {
+
+
+    font-size:12px;
+
+
+}
+
+
+.hero-rating__text {
+
+
+    font-size:8px;
+
+
+}
+
+
+.hero-rating__text strong {
+
+
+    font-size:11px;
+
+
+}
+
+
+}
 
 /* ==========================================================================
    Benefício dos bônus
@@ -3676,18 +3736,15 @@ section {
   min-width: 0;
 
   margin: 0;
-
   padding: 0;
 
-  font-family:
-    var(--font-body);
+  font-family: var(--font-body);
 
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.45;
 
-  color:
-    var(--color-text-light);
+  color: var(--color-text-light);
 
   text-align: left;
 
@@ -3700,8 +3757,7 @@ section {
 .bonus-benefit .benefit-text strong {
   font-weight: 700;
 
-  color:
-    var(--color-text-light);
+  color: var(--color-text);
 }
 
 
@@ -3961,15 +4017,6 @@ section {
     top: 8px;
     right: 8px;
   }
-}
-
-
-/* ==========================================================================
-   Ajuste de espaçamento do Hero
-   ========================================================================== */
-
-.hero-content > .hero-price {
-  margin-top: 0 !important;
 }
 
 
@@ -4357,25 +4404,16 @@ section {
 .final-cta .section-subtitle {
   width: 100%;
   max-width: 620px;
-
   margin: 0 auto 24px;
-
-  font-family:
-    var(--font-body);
-
+  font-family: var(--font-body);
   font-size: 17px;
   font-weight: 400;
   line-height: 1.45;
-
   text-align: center;
-
-  color: var(--color-primary);
+  color: var(--color-text-light);
 }
-
 .final-cta .section-subtitle strong {
   font-weight: 700;
-
-  color: var(--color-primary);
 }
 
 
@@ -4385,11 +4423,8 @@ section {
 
 .bonus-benefit-highlight {
   padding: 8px 10px !important;
-
   box-sizing: border-box;
-
   background: #F0F7EC;
-
   border: 1px solid #C8DDBD;
   border-radius: 10px;
 }
@@ -4481,9 +4516,7 @@ section {
   .final-cta .section-subtitle {
     width: 100%;
     max-width: 100%;
-
     margin-bottom: 20px;
-
     font-size: 16px;
     line-height: 1.5;
   }
@@ -4521,6 +4554,28 @@ section {
 }
 
 
+/* ==========================================================
+   MELHORIA DA COMUNICAÇÃO DE PREÇO
+========================================================== */
+
+.price-old-inline {
+
+    text-decoration: line-through;
+
+    opacity: .65;
+
+}
+
+
+.hero-price-label {
+
+    font-size: 15px;
+
+    line-height: 1.4;
+
+}
+
+
 /* ==========================================================================
    FAQ
    ========================================================================== */
@@ -4528,7 +4583,7 @@ section {
 .faq-list {
   width: 100%;
   max-width: 800px;
-
+  
   margin: 48px auto 0;
 }
 
@@ -4655,6 +4710,11 @@ section {
   }
 }
 
+/* FAQ - Fundo padrão */
+#duvidas {
+  background-color: var(--color-bg);
+}
+
 /* ==========================================================================
    Card da oferta final
    ========================================================================== */
@@ -4685,48 +4745,6 @@ section {
     var(--shadow-lg);
 
   text-align: center;
-}
-
-
-/* ==========================================================================
-   Lista de benefícios da oferta final
-   ========================================================================== */
-
-.offer-benefits {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 16px;
-
-  margin-bottom: 40px;
-
-  padding: 0;
-
-  list-style: none;
-
-  text-align: left;
-}
-
-.offer-benefits li {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.offer-benefits svg {
-  flex-shrink: 0;
-
-  width: 20px;
-  height: 20px;
-
-  color:
-    var(--color-secondary-light);
 }
 
 
@@ -4801,15 +4819,11 @@ section {
 
 .final-cta-title {
   margin-bottom: 16px;
-
-  font-family:
-    var(--font-display);
-
+  font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 700;
-
-  color:
-    var(--color-text);
+  line-height: 1.3;
+  color: var(--color-text);
 }
 
 .final-cta-title span {
@@ -5052,10 +5066,9 @@ section {
 .hero-price {
 
     text-align: center;
-    margin: 20px 0 12px;
+    margin: 0 0 16px;
 
 }
-
 
 
 .hero-price-label {
@@ -5064,23 +5077,6 @@ section {
     margin-bottom: 4px;
 
 }
-
-
-
-.hero-price-original {
-
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.1;
-
-    text-decoration: line-through;
-
-    opacity: 0.6;
-
-    margin-bottom: 4px;
-
-}
-
 
 
 .hero-price-current {
@@ -5093,75 +5089,658 @@ section {
 
 
 /* ==========================================================
-   Barra de oferta no topo
+   Barra fixa de oferta
 ========================================================== */
 
 .promo-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 34px;
 
-    background-color: #F3D9A6;
+    position:fixed;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top:0;
+    left:0;
 
-    z-index: 9999;
+    width:100%;
 
-    padding: 0 15px;
-    box-sizing: border-box;
+    height:36px;
 
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.3;
-    color: #9E7242;
-    text-align: center;
+    background:#C4784A;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    z-index:9999;
+
+    padding:0 10px;
+
+    box-sizing:border-box;
+
 }
+
+
+.promo-icon {
+
+    font-size:13px;
+
+    flex-shrink:0;
+
+}
+
 
 .promo-message {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+
+    font-family:var(--font-body);
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:#fff8ec;
+
+    text-align:center;
+
+    letter-spacing:.2px;
+
 }
 
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .promo-bar {
+
+        height:34px;
+
+        padding:0 8px;
+
+    }
+
+
+    .promo-icon {
+
+        font-size:12px;
+
+    }
+
+
+    .promo-message {
+
+        font-size:10.5px;
+
+        white-space:nowrap;
+
+    }
+
+
+}
+
+
 body {
-    padding-top: 34px;
+
+    padding-top:36px;
+
+}
+
+
+/* ==========================================================================
+   DEPOIMENTOS — CARROSSEL CONTÍNUO
+   ========================================================================== */
+
+.customer-results {
+    position: relative;
+    width: 100%;
+    padding: 48px 0;
+    overflow: hidden;
+    background: var(--color-white, #ffffff);
+}
+
+
+/* CABEÇALHO */
+
+.customer-results-heading {
+    width: calc(100% - 40px);
+    max-width: 800px;
+    margin: 0 auto 38px;
+}
+
+.customer-results-heading .section-subtitle {
+    max-width: 650px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* VIEWPORT */
+
+.testimonials-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    /* importante para mobile */
+    touch-action: pan-y;
+
+    /* cria camada própria */
+    transform: translateZ(0);
+}
+
+
+/* TRACK */
+
+.testimonials-track {
+    display: flex;
+    align-items: flex-start;
+
+    width: max-content;
+
+    transform: translate3d(0, 0, 0);
+
+    /*
+     * MUITO IMPORTANTE:
+     * nenhuma animação CSS.
+     * O movimento será controlado pelo JS.
+     */
+    animation: none !important;
+    transition: none !important;
+
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+
+/* GRUPOS */
+
+.testimonials-group {
+    display: flex;
+    flex: 0 0 auto;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    /*
+     * cria exatamente o mesmo espaço
+     * entre o fim do grupo 1 e início do grupo 2
+     */
+    padding-right: 18px;
+}
+
+
+/* CARDS */
+
+.testimonial-slide {
+    flex: 0 0 260px;
+
+    width: 260px;
+    margin: 0;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(196, 120, 74, 0.20);
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 10px 28px
+        rgba(70, 47, 31, 0.10);
+}
+
+
+/* IMAGENS */
+
+.testimonial-slide img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+
+    background: #ffffff;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+}
+
+
+/* FADE ESQUERDO/DIREITO */
+
+.testimonials-marquee::before,
+.testimonials-marquee::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    z-index: 10;
+
+    width: clamp(20px, 5vw, 70px);
+
+    pointer-events: none;
+}
+
+.testimonials-marquee::before {
+    left: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
+}
+
+.testimonials-marquee::after {
+    right: 0;
+
+    background:
+        linear-gradient(
+            to left,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0) 100%
+        );
+}
+
+
+/* NOTA */
+
+.testimonials-note {
+    width: calc(100% - 40px);
+    max-width: 650px;
+
+    margin: 25px auto 0;
+
+    font-family: var(--font-body);
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+
+    text-align: center;
+
+    color: var(--color-text-light);
+
+    opacity: 0.78;
+}
+
+
+/* ==========================================================================
+   TABLET
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    .testimonials-group {
+        gap: 16px;
+        padding-right: 16px;
+    }
+
+    .testimonial-slide {
+        flex-basis: 245px;
+        width: 245px;
+    }
+
+}
+
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+
+    .customer-results {
+        padding: 32px 0;
+    }
+
+    .customer-results-heading {
+        width: 100%;
+
+        margin-bottom: 27px;
+
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .customer-results-heading .section-subtitle {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .testimonials-group {
+        gap: 12px;
+        padding-right: 12px;
+    }
+
+    .testimonial-slide {
+        flex: 0 0 min(76vw, 300px);
+
+        width: min(76vw, 300px);
+
+        border-radius: 15px;
+
+        box-shadow:
+            0 8px 22px
+            rgba(70, 47, 31, 0.09);
+    }
+
+    .testimonials-marquee::before,
+    .testimonials-marquee::after {
+        width: 18px;
+    }
+
+    .testimonials-note {
+        width: calc(100% - 28px);
+
+        margin-top: 20px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* ==========================================================================
+   MOBILE PEQUENO
+   ========================================================================== */
+
+@media (max-width: 380px) {
+
+    .testimonials-group {
+        gap: 10px;
+        padding-right: 10px;
+    }
+
+    .testimonial-slide {
+        flex-basis: 78vw;
+        width: 78vw;
+    }
+
 }
 
 
 /* ==========================================================
-   Mobile
+   CRIADORA DA COLEÇÃO
 ========================================================== */
 
-@media (max-width: 600px) {
 
-    .promo-bar {
-        height: 48px;
-        padding: 5px 15px;
+.creator-section {
 
-        font-size: 11px;
-        line-height: 1.35;
-    }
+    padding:30px 0;
 
-    .promo-message {
-        flex-direction: column;
-        gap: 1px;
-    }
+    background-color:var(--color-white);
 
-    .promo-title,
-    #promo-date {
-        display: block;
-        white-space: nowrap;
-    }
-
-    body {
-        padding-top: 48px;
-    }
 }
+
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+========================================================== */
+
+
+.creator-wrapper {
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(320px, 0.85fr)
+        minmax(420px, 1.15fr);
+
+    align-items:center;
+
+    gap:35px;
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
+
+/* ==========================================================
+   IMAGEM
+========================================================== */
+
+
+.creator-image {
+
+    width:100%;
+
+    max-width:420px;
+
+    aspect-ratio:4 / 5;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+
+.creator-image img {
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+
+.creator-content {
+
+    color:var(--color-text);
+
+}
+
+
+.creator-content p {
+
+    font-family:var(--font-body);
+
+    font-size:15px;
+
+    line-height:1.55;
+
+    color:var(--color-text-light);
+
+    margin-bottom:12px;
+
+}
+
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+
+.creator-title {
+
+    font-family:var(--font-display);
+
+    font-size:36px;
+
+    line-height:1.2;
+
+    margin-bottom:12px;
+
+    color:var(--color-text);
+
+}
+
+
+.creator-title span {
+
+    display:block;
+
+    font-family:var(--font-script);
+
+    color:var(--color-primary);
+
+    font-size:110%;
+
+    margin-top:3px;
+
+}
+
+
+/* ==========================================================
+   ASSINATURA
+========================================================== */
+
+
+.creator-signature {
+
+    margin-top:15px;
+
+    font-family:var(--font-script);
+
+    font-size:42px;
+
+    line-height:1;
+
+    color:var(--color-primary);
+
+}
+
+
+.creator-signature small {
+
+    display:block;
+
+    margin-top:6px;
+
+    font-family:var(--font-body);
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    line-height:1.6;
+
+    color:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   TABLET / MOBILE
+========================================================== */
+
+
+@media(max-width:900px){
+
+
+    .creator-section {
+
+        padding:24px 0;
+
+    }
+
+
+    .creator-wrapper {
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+        max-width:500px;
+
+    }
+
+
+    .creator-image {
+
+        max-width:380px;
+
+        margin:0 auto;
+
+    }
+
+
+    .creator-content {
+
+        text-align:center;
+
+    }
+
+
+    .creator-title {
+
+        font-size:30px;
+
+    }
+
+
+    .creator-content p {
+
+        font-size:15px;
+
+        text-align:left;
+
+    }
+
+
+    .creator-signature {
+
+        text-align:center;
+
+    }
+
+
+}
+
+/* ==========================================================
+   ROLAGEM SUAVE PARA BOTÕES DE OFERTA
+========================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Ajuste da posição final para não colar o bloco no topo */
+#oferta {
+    scroll-margin-top: 30px;
+}
+
+
+
+.urgency-banner {background: #FFECB3;
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 16px;             
+    border-radius: 10px;
+    border: 1px solid #FFE082;}
+
+
 
 
 /* ==========================================================================

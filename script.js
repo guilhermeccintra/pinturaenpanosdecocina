@@ -575,151 +575,112 @@ document.addEventListener(
 
 /* ==========================================================
    ANIMAÇÕES DE ENTRADA
+   Com fallback de segurança
 ========================================================== */
 
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+    const elementos = document.querySelectorAll(".fade-in");
 
-
-        const elementos =
-            document.querySelectorAll(
-                ".fade-in"
-            );
-
-
-        if(!elementos.length){
-
-            return;
-
-        }
-
-
-
-        const reduzirMovimento =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            )
-            .matches;
-
-
-
-        if(reduzirMovimento){
-
-
-            elementos.forEach(
-                function(element){
-
-
-                    element.classList.add(
-                        "visible"
-                    );
-
-
-                }
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-        /*
-         * Fallback para navegadores antigos.
-         */
-
-        if(
-            !("IntersectionObserver" in window)
-        ){
-
-
-            elementos.forEach(
-                function(element){
-
-
-                    element.classList.add(
-                        "visible"
-                    );
-
-
-                }
-            );
-
-
-            return;
-
-        }
-
-
-
-
-
-        const observer =
-            new IntersectionObserver(
-                function(entries, observer){
-
-
-                    entries.forEach(
-                        function(entry){
-
-
-                            if(
-                                entry.isIntersecting
-                            ){
-
-
-                                entry.target.classList.add(
-                                    "visible"
-                                );
-
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-
-                            }
-
-
-                        }
-                    );
-
-
-                },
-                {
-                    threshold:0.1,
-
-                    rootMargin:
-                        "0px 0px -50px 0px"
-                }
-            );
-
-
-
-
-
-        elementos.forEach(
-            function(element){
-
-
-                observer.observe(
-                    element
-                );
-
-
-            }
-        );
-
-
-
+    if (!elementos.length) {
+        return;
     }
-);
 
+    const reduzirMovimento = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    /*
+     * Sem animação quando o usuário prefere
+     * movimento reduzido.
+     */
+    if (reduzirMovimento) {
+
+        elementos.forEach(function (elemento) {
+            elemento.classList.add("visible");
+        });
+
+        return;
+    }
+
+
+    /*
+     * Fallback para navegadores sem
+     * IntersectionObserver.
+     */
+    if (!("IntersectionObserver" in window)) {
+
+        elementos.forEach(function (elemento) {
+            elemento.classList.add("visible");
+        });
+
+        return;
+    }
+
+
+    const observer = new IntersectionObserver(
+        function (entries, observerInstance) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observerInstance.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.05,
+            rootMargin: "0px 0px -20px 0px"
+        }
+    );
+
+
+    elementos.forEach(function (elemento) {
+        observer.observe(elemento);
+    });
+
+
+    /*
+     * FALLBACK DE SEGURANÇA
+     *
+     * Se por qualquer motivo o observer não atualizar
+     * corretamente durante o carregamento, garantimos
+     * que nenhuma seção permaneça invisível.
+     */
+    window.addEventListener(
+        "load",
+        function () {
+
+            setTimeout(function () {
+
+                elementos.forEach(function (elemento) {
+
+                    const rect =
+                        elemento.getBoundingClientRect();
+
+                    if (
+                        rect.top < window.innerHeight * 1.25
+                    ) {
+                        elemento.classList.add("visible");
+                    }
+
+                });
+
+            }, 300);
+
+        },
+        { once: true }
+    );
+
+});
 
 
 
@@ -965,43 +926,6 @@ document.addEventListener(
 
         }
 
-
-       
-         /*
-         * BARRA TOPO
-         */
-
-       function atualizarDataPromocao() {
-    const elemento = document.getElementById("promo-date");
-
-    if (!elemento) return;
-
-    const hoje = new Date();
-
-    const dia = String(hoje.getDate()).padStart(2, "0");
-
-    const meses = [
-        "JANEIRO",
-        "FEVEREIRO",
-        "MARÇO",
-        "ABRIL",
-        "MAIO",
-        "JUNHO",
-        "JULHO",
-        "AGOSTO",
-        "SETEMBRO",
-        "OUTUBRO",
-        "NOVEMBRO",
-        "DEZEMBRO"
-    ];
-
-    const mes = meses[hoje.getMonth()];
-    const ano = hoje.getFullYear();
-
-    elemento.textContent = `${dia} DE ${mes} DE ${ano}!`;
-}
-
-atualizarDataPromocao();
 
 
 
@@ -1264,102 +1188,504 @@ atualizarDataPromocao();
 );
 
 /* ==========================================================
-   TRACKING — CHECKOUT DIRETO
+   TRACKING — CLIQUES PARA CHECKOUT
 
-   Substitui:
-   - OFERTA SURPRESA — ENVELOPES
-   - POPUP DE DESCONTO
-   - REVELAÇÃO DE OFERTA
-
-   Agora:
-   CTA → Checkout direto Hotmart
-   Tracking → clique real no botão
+   Cada CTA de checkout deve possuir:
+   data-checkout-button
+   data-checkout-position="..."
 ========================================================== */
-
 
 document.addEventListener(
     "DOMContentLoaded",
-    function(){
-
+    function () {
 
         const checkoutButtons =
             document.querySelectorAll(
-                ".btn-primary"
+                "[data-checkout-button]"
             );
 
 
+        if (!checkoutButtons.length) {
+            return;
+        }
 
-        if(!checkoutButtons.length){
+
+        checkoutButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const position =
+                            button.getAttribute(
+                                "data-checkout-position"
+                            ) || "unknown";
+
+
+                        /*
+                         * MICROSOFT CLARITY
+                         *
+                         * Evento personalizado para localizar
+                         * sessões em que houve clique no checkout.
+                         */
+
+                        if (
+                            typeof clarity === "function"
+                        ) {
+
+                            clarity(
+                                "event",
+                                "checkout_click_" + position
+                            );
+
+                        }
+
+
+                        /*
+                         * GOOGLE ANALYTICS 4
+                         *
+                         * Evento próprio para medir intenção
+                         * real de ida ao checkout.
+                         */
+
+                        if (
+                            typeof gtag === "function"
+                        ) {
+
+                            gtag(
+                                "event",
+                                "checkout_click",
+                                {
+                                    checkout_position: position,
+                                    value: 37.90,
+                                    currency: "BRL"
+                                }
+                            );
+
+
+                            /*
+                             * GOOGLE ADS — CONVERSÃO
+                             */
+
+                            gtag(
+                                "event",
+                                "conversion",
+                                {
+                                    send_to:
+                                        "AW-18379872794/tOsJCOvXo98cEJq0mrxE",
+
+                                    value: 37.90,
+                                    currency: "BRL"
+                                }
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+
+
+/* ==========================================================
+   CARROSSEL INFINITO — DEPOIMENTOS
+
+   Movimento controlado 100% por JavaScript.
+   Não depende de animation CSS.
+========================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const marquee = document.querySelector(
+        "[data-testimonials-marquee]"
+    );
+
+    if (!marquee) {
+        console.warn("Carrossel: marquee não encontrado.");
+        return;
+    }
+
+
+    const track = marquee.querySelector(
+        "[data-testimonials-track]"
+    );
+
+    if (!track) {
+        console.warn("Carrossel: track não encontrado.");
+        return;
+    }
+
+
+    const groups = track.querySelectorAll(
+        ".testimonials-group"
+    );
+
+    if (groups.length < 2) {
+        console.warn(
+            "Carrossel: são necessários dois grupos."
+        );
+        return;
+    }
+
+
+    const firstGroup = groups[0];
+
+
+    /* ======================================================
+       CONFIGURAÇÕES
+    ====================================================== */
+
+    /*
+     * Pixels por segundo.
+     *
+     * Desktop: 32
+     * Mobile: 24
+     */
+
+    let speed =
+        window.innerWidth <= 600
+            ? 24
+            : 32;
+
+
+    let position = 0;
+
+    let groupWidth = 0;
+
+    let lastTimestamp = null;
+
+    let animationFrame = null;
+
+    let paused = false;
+
+    let visible = true;
+
+
+    /* ======================================================
+       CALCULA A LARGURA EXATA DO PRIMEIRO GRUPO
+    ====================================================== */
+
+    function calculateWidth() {
+
+        groupWidth =
+            firstGroup.getBoundingClientRect().width;
+
+    }
+
+
+    /* ======================================================
+       APLICA POSIÇÃO
+    ====================================================== */
+
+    function render() {
+
+        track.style.transform =
+            "translate3d(" +
+            (-position) +
+            "px, 0, 0)";
+
+    }
+
+
+    /* ======================================================
+       LOOP PRINCIPAL
+    ====================================================== */
+
+    function animate(timestamp) {
+
+        if (lastTimestamp === null) {
+            lastTimestamp = timestamp;
+        }
+
+
+        /*
+         * Tempo decorrido entre frames.
+         */
+
+        let delta =
+            (timestamp - lastTimestamp) / 1000;
+
+
+        lastTimestamp = timestamp;
+
+
+        /*
+         * Evita salto grande quando a aba
+         * volta depois de ficar em segundo plano.
+         */
+
+        delta = Math.min(delta, 0.05);
+
+
+        if (
+            !paused &&
+            visible &&
+            groupWidth > 0
+        ) {
+
+            position += speed * delta;
+
+
+            /*
+             * LOOP INFINITO
+             *
+             * Quando percorremos exatamente
+             * a largura do primeiro grupo,
+             * voltamos uma largura.
+             *
+             * Como o segundo grupo é idêntico,
+             * visualmente nada muda.
+             */
+
+            if (position >= groupWidth) {
+
+                position =
+                    position % groupWidth;
+
+            }
+
+
+            render();
+
+        }
+
+
+        animationFrame =
+            requestAnimationFrame(animate);
+
+    }
+
+
+    /* ======================================================
+       DESKTOP — PAUSA NO HOVER
+    ====================================================== */
+
+    const canHover =
+        window.matchMedia(
+            "(hover: hover) and (pointer: fine)"
+        );
+
+
+    if (canHover.matches) {
+
+        marquee.addEventListener(
+            "mouseenter",
+            function () {
+
+                paused = true;
+
+            }
+        );
+
+
+        marquee.addEventListener(
+            "mouseleave",
+            function () {
+
+                paused = false;
+
+                /*
+                 * Reinicia referência temporal
+                 * para não causar salto.
+                 */
+
+                lastTimestamp = null;
+
+            }
+        );
+
+    }
+
+
+    /* ======================================================
+       PAUSA QUANDO A ABA FICA OCULTA
+    ====================================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        function () {
+
+            if (document.hidden) {
+
+                paused = true;
+
+            } else {
+
+                paused = false;
+
+                lastTimestamp = null;
+
+            }
+
+        }
+    );
+
+
+    /* ======================================================
+       INTERSECTION OBSERVER
+       Economiza processamento fora da tela.
+    ====================================================== */
+
+    if ("IntersectionObserver" in window) {
+
+        const observer =
+            new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            visible =
+                                entry.isIntersecting;
+
+                            lastTimestamp = null;
+
+                        }
+                    );
+
+                },
+
+                {
+                    root: null,
+
+                    /*
+                     * Começa a mover antes
+                     * de entrar totalmente na tela.
+                     */
+
+                    rootMargin:
+                        "250px 0px 250px 0px",
+
+                    threshold: 0
+                }
+
+            );
+
+
+        observer.observe(marquee);
+
+    }
+
+
+    /* ======================================================
+       RESIZE
+    ====================================================== */
+
+    let resizeTimer = null;
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            clearTimeout(resizeTimer);
+
+
+            resizeTimer =
+                setTimeout(
+                    function () {
+
+                        /*
+                         * Atualiza velocidade
+                         * desktop/mobile.
+                         */
+
+                        speed =
+                            window.innerWidth <= 600
+                                ? 24
+                                : 32;
+
+
+                        calculateWidth();
+
+
+                        /*
+                         * Mantém posição dentro
+                         * do intervalo válido.
+                         */
+
+                        if (groupWidth > 0) {
+
+                            position =
+                                position % groupWidth;
+
+                        } else {
+
+                            position = 0;
+
+                        }
+
+
+                        render();
+
+                        lastTimestamp = null;
+
+                    },
+                    150
+                );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ======================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+
+    function init() {
+
+        calculateWidth();
+
+
+        if (groupWidth <= 0) {
+
+            /*
+             * Caso raro em que o layout ainda
+             * não foi calculado.
+             */
+
+            requestAnimationFrame(init);
 
             return;
 
         }
 
 
+        position = 0;
+
+        render();
 
 
-        checkoutButtons.forEach(
-            function(button){
+        if (animationFrame === null) {
 
+            animationFrame =
+                requestAnimationFrame(animate);
 
-                button.addEventListener(
-                    "click",
-                    function(){
-
-
-                        /*
-                         * GOOGLE ADS — CONVERSÃO
-                         * Dispara no clique do CTA.
-                         *
-                         * InitiateCheckout (Meta) e
-                         * begin_checkout (GA4) são
-                         * enviados pela Hotmart ao
-                         * chegar no checkout.
-                         */
-
-                        if(
-                            typeof gtag === "function"
-                        ){
-
-
-                            gtag(
-
-                                "event",
-
-                                "conversion",
-
-                                {
-
-                                    'send_to':
-                                        'AW-18379872794/tOsJCOvXo98cEJq0mrxE',
-
-                                    'value':
-                                        27.90,
-
-                                    'currency':
-                                        'BRL'
-
-                                }
-
-                            );
-
-
-                        }
-
-
-                    }
-                );
-
-
-            }
-        );
-
-
+        }
 
     }
-);
 
 
+    /*
+     * requestAnimationFrame garante que o navegador
+     * tenha realizado pelo menos um ciclo de layout.
+     */
+
+    requestAnimationFrame(init);
+
+});
 
 
 

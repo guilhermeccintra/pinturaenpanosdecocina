@@ -5730,15 +5730,49 @@ html {
 
 
 
-.urgency-banner {background: #FFECB3;
+.urgency-banner {
+    background: #FFECB3;
     color: var(--primary);
     font-size: 15px;
     font-weight: 700;
     text-align: center;
-    padding: 8px;
-    margin-bottom: 16px;             
+
+    /* Espaçamento interno */
+    padding: 8px 14px;
+
+    /* Faz a caixa ficar somente do tamanho do texto */
+    width: fit-content;
+    max-width: 90%;
+
+    /* Centraliza */
+    margin: 0 auto 16px;
+
+    /* Visual */
     border-radius: 10px;
-    border: 1px solid #FFE082;}
+    border: 1px solid #FFE082;
+
+    /* Evita comportamento estranho */
+    display: block;
+    box-sizing: border-box;
+}
+
+
+/* Ajuste para celular */
+@media (max-width: 768px) {
+
+    .urgency-banner {
+        font-size: 14px;
+        padding: 8px 12px;
+
+        /* Mantém compacto, mas permite quebra se necessário */
+        width: fit-content;
+        max-width: 95%;
+
+        margin: 0 auto 16px;
+        line-height: 1.3;
+    }
+
+}
 
 
 

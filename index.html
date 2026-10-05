@@ -3,26 +3,26 @@
 
 <head>
 
-
+ 
   <!-- =========================================================
        CONFIGURACIONES BÁSICAS / SEO
   ========================================================== -->
 
   <meta charset="UTF-8">
-
-  <meta
+   
+  <meta 
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
   <meta
     name="description"
-    content="Pinta Paños de Cocina desde Cero con 120 Diseños Exclusivos Listos para Usar"
+    content="Crea hermosos paños de cocina pintados por ti misma, incluso si empiezas desde cero"
   >
 
   <meta name="theme-color" content="#C4784A">
 
-  <title>Pinta Paños de Cocina desde Cero con 120 Diseños Exclusivos Listos para Usar</title>
+  <title>Crea hermosos paños de cocina pintados por ti misma, incluso desde cero</title>
 
 
   <!-- =========================================================
@@ -31,16 +31,18 @@
 
   <meta
     property="og:title"
-    content="Pinta Paños de Cocina desde Cero con 120 Diseños Exclusivos Listos para Usar"
+    content="Crea hermosos paños de cocina pintados por ti misma, incluso desde cero"
   >
 
   <meta
     property="og:description"
-    content="Comienza desde cero con diseños exclusivos, clase en video paso a paso y bonos para tus primeras piezas."
+    content="Ten en tus manos 120 diseños exclusivos,
+                videoclase paso a paso de pintura y materiales simples
+                para transformar dibujos en hermosas piezas artesanales."
   >
 
   <meta property="og:type" content="product">
-  <meta property="og:locale" content="es_LA">
+  <meta property="og:locale" content="es_419">
 
 
   <!-- =========================================================
@@ -58,7 +60,7 @@
 
   
 <!-- =========================================================
-     FUENTES — CARREGAMENTO OTIMIZADO
+     FUENTES — CARGA OPTIMIZADA
 ========================================================== -->
 
 <link
@@ -103,7 +105,7 @@
   >
 
 
-  <!-- TRACKING CARREGADO APÓS CSS PARA REDUZIR BLOQUEIO -->
+  <!-- TRACKING CARGADO DESPUÉS DE CSS PARA REDUCIR BLOQUEO -->
 <!-- =========================================================
        GOOGLE TAG - GOOGLE ADS + GOOGLE ANALYTICS 4
   ========================================================== -->
@@ -129,7 +131,7 @@
 
 <!-- =========================================================
      META PIXEL + CAPI
-     PageView e ViewContent com deduplicação
+     PageView y ViewContent con deduplicación
 ========================================================= -->
 
 <script>
@@ -166,7 +168,7 @@
 
 
 /* =========================================================
-   FUNÇÕES AUXILIARES
+   FUNCIONES AUXILIARES
 ========================================================= */
 
 function generateMetaEventId(eventName) {
@@ -214,24 +216,24 @@ function getStoredFbclid() {
 }
 
 function buildFbc() {
-  // 1. Tenta recuperar do sessionStorage (já calculado nesta sessão)
+  // 1. Intenta recuperar del sessionStorage (ya calculado en esta sesión)
   try {
     var sessionFbc = sessionStorage.getItem('meta_fbc');
     if (sessionFbc) return sessionFbc;
   } catch(e) {}
 
-  // 2. Prioridade para o cookie _fbc já criado pela Meta
+  // 2. Prioridad para la cookie _fbc ya creada por Meta
   var existingFbc = getCookie('_fbc');
   if (existingFbc) {
     try { sessionStorage.setItem('meta_fbc', existingFbc); } catch(e) {}
     return existingFbc;
   }
 
-  // 3. Tenta pegar fbclid da URL
+  // 3. Intenta obtener fbclid de la URL
   var params = new URLSearchParams(window.location.search);
   var urlFbclid = params.get('fbclid');
 
-  // 4. Se a URL atual não tiver, tenta usar o fbclid salvo pelo tracking.js
+  // 4. Si la URL actual no tiene, intenta usar el fbclid guardado por tracking.js
   var fbclid = urlFbclid || getStoredFbclid();
 
   if (!fbclid) {
@@ -270,11 +272,11 @@ function waitForFbp(callback, maxWaitMs = 2000, intervalMs = 50) {
 
 
 /* =========================================================
-   ENVIA EVENTO PARA CAPI
+   ENVIAR EVENTO A CAPI
 ========================================================= */
 
 function sendMetaCapi(eventName, eventId, eventCustomData = {}) {
-  // Ler valores consistentes
+  // Leer valores consistentes
   var currentFbc = buildFbc();
   var currentExternalId = getExternalId();
   
@@ -296,7 +298,7 @@ function sendMetaCapi(eventName, eventId, eventCustomData = {}) {
       },
       body: JSON.stringify(payload)
     }).catch(function(error) {
-      console.warn('Erro ao enviar Meta CAPI:', error);
+      console.warn('Error al enviar Meta CAPI:', error);
     });
   });
 }
@@ -340,9 +342,9 @@ sendMetaCapi('PageView', pageViewEventId);
 var viewContentEventId = generateMetaEventId('ViewContent');
 
 var viewContentData = {
-  content_name: '120 Diseños para Pintura en Paños de Cocina',
+  content_name: '120 Diseños Exclusivos para Pintar Paños de Cocina',
   content_category: 'Artesanía - Pintura en Tela',
-  content_ids: ['120-diseños-paño-de-prato'],
+  content_ids: ['120-disenos-pano-de-cocina'],
   content_type: 'product',
   value: 7.90,
   currency: 'USD'
@@ -368,12 +370,13 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Pinta Paños de Cocina desde Cero con 120 Diseños Exclusivos Listos para Usar",
-    "description": "Comienza desde cero con diseños exclusivos, clase en video paso a paso y bonos para tus primeras piezas.",
+    "name": "Crea hermosos paños de cocina pintados por ti misma, incluso desde cero",
+    "description": "Ten en tus manos 120 diseños exclusivos, videoclase paso a paso de pintura y materiales simples para transformar dibujos en hermosas piezas artesanales.",
     "category": "Artesanía > Pintura en Tela",
     "offers": {
       "@type": "Offer",
       "availability": "https://schema.org/InStock",
+      "price": "7.90",
       "priceCurrency": "USD"
     },
     "brand": {
@@ -393,7 +396,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 <body>
 
   <!-- =========================================================
-       META PIXEL - FALLBACK SEM JAVASCRIPT
+       META PIXEL - FALLBACK SIN JAVASCRIPT
   ========================================================== -->
 
   <noscript>
@@ -406,67 +409,23 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
     >
   </noscript>
 
-  <!-- RESTANTE DO SEU SITE CONTINUA AQUI -->
+  <!-- RESTO DEL SITIO CONTINÚA AQUÍ -->
 
+  <div class="promo-bar">
 
-<div class="promo-bar">
-
- <span class="promo-message">
-        120 DISEÑOS EXCLUSIVOS + 4 BONO PARA COMENZAR DESDE CERO
+    <span class="promo-message" id="promo-date">
+        OFERTA ESPECIAL DISPONIBLE SOLO HOY
     </span>
 
 </div>
 
-  
+    
 <!-- HERO -->
 <section class="hero bg-default" id="inicio">
 
     <div class="container">
 
         <div class="hero-content centered">
-
-
-<!-- AVALIAÇÕES -->
-<div 
-    class="hero-rating"
-    aria-label="Evaluación de 4.91 de 5 con 1.943 evaluaciones"
->
-
-    <div class="hero-rating__avatars">
-
-        <img src="images/avatar1.webp" alt="">
-        <img src="images/avatar2.webp" alt="">
-        <img src="images/avatar3.webp" alt="">
-        <img src="images/avatar4.webp" alt="">
-
-    </div>
-
-
-    <div class="hero-rating__content">
-
-        <div class="hero-rating__stars" aria-hidden="true">
-            <span>★</span>
-            <span>★</span>
-            <span>★</span>
-            <span>★</span>
-            <span>★</span>
-        </div>
-
-
-        <p class="hero-rating__text">
-
-            <strong>4,91/5</strong>
-
-            <span>
-                en 1.943 evaluaciones
-            </span>
-
-        </p>
-
-    </div>
-
-
-</div>
           
 
 
@@ -474,29 +433,26 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 <h1 class="hero-title">
 
-  
-    <span class="hero-title-main">
-        Transforma Tus Paños de Cocina
+    <span class="hero-eyebrow">
+        DESPIERTA TU LADO ARTESANO
     </span>
 
-    <span class="hero-title-script">
-        en Piezas Únicas Hechas por Ti
-    </span>
+    <h2 class="hero-final__title">
+                Crea hermosos paños de cocina
+                <span>pintados por ti</span>
+                incluso empezando desde cero
+            </h2>
 
-    <span class="hero-title-eyebrow">
-    Aunque nunca hayas tomado un pincel antes.
-    </span>
-  
 </h1>
 
 <!-- =====================================================
-     CARROSSEL NO LUGAR DO MOCKUP
+     CARRUSEL EN LUGAR DEL MOCKUP
 ===================================================== -->
 
 <div
     class="comparison-carousel hero-comparison-carousel"
     data-comparison-carousel
-    aria-label="Exemplos de diseños e resultados de pinturas em paño de cocina"
+    aria-label="Ejemplos de diseños y resultados de pinturas en paños de cocina"
 >
 
     <div
@@ -738,7 +694,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <img
                     src="images/risco-04.webp"
-                    alt="Diseño pronto para ser transferido ao paño de cocina"
+                    alt="Diseño listo para ser transferido al paño de cocina"
                     loading="lazy"
                     decoding="async"
                     width="400"
@@ -861,7 +817,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 
     <!-- =====================================================
-         CONTROLES DO CARROSSEL
+         CONTROLES DEL CARRUSEL
     ===================================================== -->
 
     <div class="comparison-controls">
@@ -870,7 +826,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
             type="button"
             class="comparison-button comparison-button-prev"
             data-comparison-prev
-            aria-label="Ver comparação anterior"
+            aria-label="Ver comparación anterior"
         >
             <span aria-hidden="true">‹</span>
         </button>
@@ -878,14 +834,14 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
         <div
             class="comparison-dots"
             data-comparison-dots
-            aria-label="Selecionar comparação"
+            aria-label="Seleccionar comparación"
         ></div>
 
         <button
             type="button"
             class="comparison-button comparison-button-next"
             data-comparison-next
-            aria-label="Ver próxima comparação"
+            aria-label="Ver siguiente comparación"
         >
             <span aria-hidden="true">›</span>
         </button>
@@ -895,23 +851,37 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 </div>
 
 
+<!-- MECANISMO SIMPLE -->
+
+<div class="hero-method">
+
+    <p>
+        Ten en tus manos <strong>120 diseños exclusivos,
+                videoclase paso a paso de pintura y materiales simples</strong>
+                para transformar dibujos en hermosas piezas artesanales.
+    </p>
+
+</div>
+
+
+          
 <ul class="hero-benefits">
 
 
-    <!-- PRODUTO PRINCIPAL -->
+    <!-- BENEFICIO 1 -->
     <li>
 
         <span class="benefit-icon" aria-hidden="true">
-            🎨
-        </span>
+    ✓
+</span>
 
         <span class="benefit-text">
 
             <strong>
-                120 Diseños Exclusivos:
+                Crea tu primera pieza sin necesidad de dibujar:
             </strong>
 
-            listos para imprimir en tamaño real, transferir al paño de cocina y empezar a pintar.
+            usa diseños listos para imprimir.
 
         </span>
 
@@ -919,127 +889,90 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 
 
-    <!-- BONO 1: VIDEOAULA - DESTAQUE -->
-    <li class="bonus-benefit bonus-benefit-highlight">
-
-        <span class="benefit-icon" aria-hidden="true">
-            ▶️
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 1 - Clase en Video Pintura en Tela desde Cero:
-            </strong>
-
-            sigue el paso a paso de la pintura,
-            desde la preparación hasta el acabado, con explicaciones simples
-            para crear tus primeras piezas.
-
-        </span>
-
-    </li>
-
-
-
-    <!-- BONO 2 -->
+    <!-- BENEFICIO 2 -->
     <li>
 
         <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
+    ✓
+</span>
 
         <span class="benefit-text">
 
             <strong>
-                Bono 2 - Guía de Transferencia Perfecta:
+                Logra un acabado más bonito:
             </strong>
 
-            aprende a transferir tus diseños al paño de cocina con papel carbón, evitando dibujos torcidos, fallas y marcas fuera de lugar.
+            aprende a transferir diseños y combinar colores.
 
         </span>
 
     </li>
 
-   <!-- BONO 3 -->
+
+
+    <!-- BENEFICIO 3 -->
     <li>
 
         <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
+    ✓
+</span>
 
         <span class="benefit-text">
 
             <strong>
-                Bono 3 - Guía de Combinación de Colores:
+                Siente el orgullo de decir: "¡lo hice yo!":
             </strong>
 
-            recibe sugerencias de paletas armoniosas para elegir tus pinturas con más facilidad y crear pinturas aún más bonitas.
+            transforma dibujos en hermosas piezas pintadas.
 
         </span>
 
     </li>
 
 
-   <!-- BONO 4 -->
-    <li>
-
-        <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 4 - Primeros Pasos para Vender tus Creaciones:
-            </strong>
-
-            aprende cómo calcular precios, armar kits, divulgar tus trabajos y conquistar tus primeros clientes.
-
-        </span>
-
-    </li>
-
-
-  
 </ul>
 
-<!-- =====================================================
-     OFERTA PRINCIPAL — HERO
-===================================================== -->
 
-<div class="hero-price">
 
-    <div class="hero-price-label">
-        De <span class="price-old-inline">US$ 19.90</span>
-        por solo:
-    </div>
+<div class="hero-buttons">
 
-    <div class="hero-price-current">
-        US$ 7.90
-    </div>
-
-</div>
-
-          <div class="urgency-banner">
-                        ⚠️ Atención: esta oferta es por tiempo limitado.
-                    </div>
-
-  <div class="hero-buttons">
   <a
-    href="https://pay.hotmart.com/D107721921W?off=mx8hdq9r"
+    href="#riscos"
     class="btn-primary btn-large"
-    data-checkout-button
-    data-checkout-position="hero"
+    data-cta="hero_ver_riscos"
   >
-    QUIERO EMPEZAR A PINTAR
+    QUIERO VER LOS DISEÑOS
   </a>
+
 </div>
 
 
-<p class="hero-info">
-    pago único • acceso inmediato
-</p>
+
+<!-- AVATARES + BENEFICIO DE LOS DISEÑOS -->
+
+<div class="hero-collection-proof">
+
+    <div class="hero-collection-proof__avatars">
+
+        <img src="images/avatar1.webp" alt="">
+        <img src="images/avatar2.webp" alt="">
+        <img src="images/avatar3.webp" alt="">
+        <img src="images/avatar4.webp" alt="">
+
+    </div>
+
+
+    <p class="hero-collection-proof__text">
+
+        <strong>
+            120 diseños exclusivos
+        </strong>
+
+        para que elijas tus favoritos, los imprimas y los transformes en hermosas piezas artesanales.
+
+    </p>
+
+</div>       
           
 </div>
 
@@ -1048,105 +981,254 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 </section>
 
 
-<!-- =========================================================
-     GALERIA DE DISEÑOS POR TEMAS
+  <!-- =========================================================
+     BLOQUE DE DOLOR / IDENTIFICACIÓN
 ========================================================= -->
 
-<section class="risks-gallery bg-white fade-in" id="diseños">
+<section class="pain-section bg-default fade-in">
 
     <div class="container">
 
-        <div class="text-center risks-gallery-heading">
+        <div class="text-center pain-heading">
 
             <span class="section-tag">
-                Algunos de los diseños incluidos
+                Antes de comenzar
             </span>
 
+
             <h2 class="section-title">
-                Elige entre diferentes
-                <span>temas de diseños</span>
+
+                ¿Tú también has pensado:
+
+                <span>
+                    "¿Será que yo puedo?"
+                </span>
+
             </h2>
 
+
             <p class="section-subtitle">
-                Son 120 modelos listos para imprimir,
-                transferir y pintar en tus paños de cocina.
+
+                Muchas personas tienen ganas de pintar,
+                pero terminan renunciando antes de empezar
+                por miedo a no saber hacerlo.
+
             </p>
 
         </div>
 
 
 
+        <div class="pain-grid">
+
+
+            <article class="pain-card">
+
+                <div class="pain-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    "Yo no sé dibujar"
+                </h3>
+
+                <p>
+                    Ve trabajos hermosos y piensa que nunca podría crear algo parecido.
+                </p>
+
+            </article>
+
+
+
+            <article class="pain-card">
+
+                <div class="pain-icon">
+                    😰
+                </div>
+
+                <h3>
+                    "Tengo miedo de equivocarme"
+                </h3>
+
+                <p>
+                    No saber transferir el dibujo o elegir los colores correctos genera inseguridad.
+                </p>
+
+            </article>
+
+
+
+            <article class="pain-card">
+
+                <div class="pain-icon">
+                    ⏳
+                </div>
+
+                <h3>
+                    "No sé por dónde empezar"
+                </h3>
+
+                <p>
+                    Buscar modelos, técnicas y materiales puede hacer que todo se complique.
+                </p>
+
+            </article>
+
+
+
+        </div>
+
+
+
+        <div class="pain-footer">
+
+
+    <div class="pain-footer-icon">
+        ✓
+    </div>
+
+
+    <div class="pain-footer-text">
+
+        <strong>
+            No necesitas experiencia previa.
+        </strong>
+
+        <span>
+            Solo sigue el proceso y comienza tu primera pintura.
+        </span>
+
+    </div>
+
+
+</div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GALERÍA DE DISEÑOS — CARRUSEL ÚNICO
+========================================================= -->
+
+<section class="risks-gallery bg-white fade-in" id="riscos">
+
+    <div class="container">
+
+
+        <div class="text-center risks-gallery-heading">
+
+
+            <span class="section-tag">
+                Algunos de los modelos incluidos
+            </span>
+
+
+            <h2 class="section-title">
+
+                Mira algunos de los
+
+                <span>
+                    120 diseños exclusivos
+                </span>
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                Modelos listos para imprimir,
+                transferir y transformar en hermosas pinturas
+                para tus paños de cocina.
+
+            </p>
+
+
+        </div>
+
+
+
+
+        <!-- =====================================================
+     CARRUSEL CONTINUO DE DISEÑOS
+====================================================== -->
+
+
+<div class="risks-marquee">
+
+
+    <div class="risks-track">
+
+
         <!-- =========================
              FRUTAS
         ========================== -->
 
-        <div class="risk-category">
 
-            <h3 class="risk-category-title">
-                Frutas
-            </h3>
+        <img 
+            src="images/frutas-01.webp"
+            alt="Diseño de frutas para pintar paños de cocina"
+            loading="lazy"
+            decoding="async"
+        >
 
+        <img 
+            src="images/frutas-02.webp"
+            alt="Diseño de frutas para pintura en tela"
+            loading="lazy"
+            decoding="async"
+        >
 
-            <div class="risk-carousel-wrapper">
+        <img 
+            src="images/frutas-03.webp"
+            alt="Modelo de diseño de frutas"
+            loading="lazy"
+            decoding="async"
+        >
 
-                <div class="risk-carousel">
-
-                    <img src="images/frutas-01.webp" alt="Diseño de frutas para pintura en paño de cocina" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/frutas-02.webp" alt="Diseño de frutas para pintura en tela" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/frutas-03.webp" alt="Modelo de diseño de frutas" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/frutas-04.webp" alt="Diseño listo para pintar de frutas" loading="lazy" decoding="async" width="600" height="848">
-
-                </div>
-
-                <span class="risk-carousel-hint">
-                    Desliza para ver más diseños →
-                </span>
-
-            </div>
-
-        </div>
-
-
+        <img 
+            src="images/frutas-04.webp"
+            alt="Diseño listo para pintar de frutas"
+            loading="lazy"
+            decoding="async"
+        >
 
 
 
         <!-- =========================
-             CAFÉ E COZINHA
+             CAFÉ Y COCINA
         ========================== -->
 
-        <div class="risk-category">
 
-            <h3 class="risk-category-title">
-                Café y Cocina
-            </h3>
+        <img 
+            src="images/cafeecozinha-01.webp"
+            alt="Diseño de café y cocina para pintura"
+            loading="lazy"
+            decoding="async"
+        >
 
+        <img 
+            src="images/cafeecozinha-02.webp"
+            alt="Diseño de cocina para paño de cocina"
+            loading="lazy"
+            decoding="async"
+        >
 
-            <div class="risk-carousel-wrapper">
+        <img 
+            src="images/cafeecozinha-03.webp"
+            alt="Modelo de diseño café y cocina"
+            loading="lazy"
+            decoding="async"
+        >
 
-                <div class="risk-carousel">
-
-                    <img src="images/cafeecozinha-01.webp" alt="Diseño de café y cocina para pintura" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/cafeecozinha-02.webp" alt="Diseño de cocina para paño de cocina" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/cafeecozinha-03.webp" alt="Modelo de diseño café e cozinha" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/cafeecozinha-04.webp" alt="Diseño pronto para transferir" loading="lazy" decoding="async" width="600" height="848">
-
-                </div>
-
-                <span class="risk-carousel-hint">
-                    Desliza para ver más diseños →
-                </span>
-
-            </div>
-
-        </div>
-
-
+        <img 
+            src="images/cafeecozinha-04.webp"
+            alt="Diseño listo para transferir"
+            loading="lazy"
+            decoding="async"
+        >
 
 
 
@@ -1154,111 +1236,209 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
              FLORES
         ========================== -->
 
-        <div class="risk-category">
 
-            <h3 class="risk-category-title">
-                Flores
-            </h3>
+        <img 
+            src="images/flores-01.webp"
+            alt="Diseño de flores para pintura"
+            loading="lazy"
+            decoding="async"
+        >
 
+        <img 
+            src="images/flores-02.webp"
+            alt="Modelo de flores para paño de cocina"
+            loading="lazy"
+            decoding="async"
+        >
 
-            <div class="risk-carousel-wrapper">
+        <img 
+            src="images/flores-03.webp"
+            alt="Diseño floral para pintura en tela"
+            loading="lazy"
+            decoding="async"
+        >
 
-                <div class="risk-carousel">
+        <img 
+            src="images/flores-04.webp"
+            alt="Diseño de flores listo para imprimir"
+            loading="lazy"
+            decoding="async"
+        >
 
-                    <img src="images/flores-01.webp" alt="Diseño de flores para pintura" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/flores-02.webp" alt="Modelo de flores para paño de cocina" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/flores-03.webp" alt="Diseño floral para pintura en tela" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/flores-04.webp" alt="Diseño de flores listo para imprimir" loading="lazy" decoding="async" width="600" height="848">
-
-                </div>
-
-                <span class="risk-carousel-hint">
-                    Desliza para ver más diseños →
-                </span>
-
-            </div>
-
-        </div>
-
-        <!-- =========================
-             ANIMAIS
-        ========================== -->
-
-        <div class="risk-category">
-
-            <h3 class="risk-category-title">
-                Animalitos
-            </h3>
-
-
-            <div class="risk-carousel-wrapper">
-
-                <div class="risk-carousel">
-
-                    <img src="images/animais-01.webp" alt="Diseño de animales para pintura en paño de cocina" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/animais-02.webp" alt="Diseño de animales para pintura en tela" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/animais-03.webp" alt="Modelo de diseño de animales" loading="lazy" decoding="async" width="600" height="848">
-
-                    <img src="images/animais-04.webp" alt="Diseño listo para pintar de animales" loading="lazy" decoding="async" width="600" height="848">
-
-                </div>
-
-                <span class="risk-carousel-hint">
-                    Desliza para ver más diseños →
-                </span>
-
-            </div>
-
-        </div>
 
 
         <!-- =========================
-             FECHAMENTO
+             ANIMALES
         ========================== -->
 
-        <div class="risks-gallery-footer">
 
-    <div class="risks-gallery-footer-icon">
-        ✓
+        <img 
+            src="images/animais-01.webp"
+            alt="Diseño de animales para pintar paños de cocina"
+            loading="lazy"
+            decoding="async"
+        >
+
+        <img 
+            src="images/animais-02.webp"
+            alt="Diseño de animales para pintura en tela"
+            loading="lazy"
+            decoding="async"
+        >
+
+        <img 
+            src="images/animais-03.webp"
+            alt="Modelo de diseño de animales"
+            loading="lazy"
+            decoding="async"
+        >
+
+        <img 
+            src="images/animais-04.webp"
+            alt="Diseño listo para pintar de animales"
+            loading="lazy"
+            decoding="async"
+        >
+
+
+
+        <!-- =========================
+             REPETICIÓN PARA LOOP
+        ========================== -->
+
+
+        <img src="images/frutas-01.webp" alt="" loading="lazy">
+        <img src="images/cafeecozinha-01.webp" alt="" loading="lazy">
+        <img src="images/flores-01.webp" alt="" loading="lazy">
+        <img src="images/animais-01.webp" alt="" loading="lazy">
+
+
     </div>
 
 
-    <div class="risks-gallery-footer-content">
+</div>
 
-        <strong>
-            Y estos son solo algunos de los modelos que recibirás.
-        </strong>
+<!-- =====================================================
+     SEGUNDO CARRUSEL DE DISEÑOS - DIRECCIÓN CONTRARIA
+====================================================== -->
+
+<div class="risks-marquee risks-marquee-reverse">
+
+    <div class="risks-track">
+
+    <img src="images/frutas-01.webp" alt="">
+    <img src="images/frutas-02.webp" alt="">
+    <img src="images/frutas-03.webp" alt="">
+    <img src="images/frutas-04.webp" alt="">
 
 
-        <span>
-            Dentro de la colección encontrarás diseños de:
-        </span>
+    <img src="images/cafeecozinha-01.webp" alt="">
+    <img src="images/cafeecozinha-02.webp" alt="">
+    <img src="images/cafeecozinha-03.webp" alt="">
+    <img src="images/cafeecozinha-04.webp" alt="">
 
 
-        <div class="risks-theme-list">
+    <img src="images/flores-01.webp" alt="">
+    <img src="images/flores-02.webp" alt="">
+    <img src="images/flores-03.webp" alt="">
+    <img src="images/flores-04.webp" alt="">
 
-            <span>🌸 Flores</span>
-            <span>🍓 Frutas</span>
-            <span>☕ Café y Cocina</span>
-            <span>🐔 Gallinitas</span>
-            <span>🐾 Animalitos</span>
-            <span>🍰 Dulces</span>
-            <span>🎄 Navidad</span>
-            <span>🐰 Pascua</span>
 
-        </div>
+    <img src="images/animais-01.webp" alt="">
+    <img src="images/animais-02.webp" alt="">
+    <img src="images/animais-03.webp" alt="">
+    <img src="images/animais-04.webp" alt="">
 
-    </div>
+
+    <!-- MISMO LOOP DEL PRIMERO -->
+
+    <img src="images/frutas-01.webp" alt="">
+    <img src="images/cafeecozinha-01.webp" alt="">
+    <img src="images/flores-01.webp" alt="">
+    <img src="images/animais-01.webp" alt="">
+
+</div>
 
 </div>
 
 
+
+        <!-- =====================================================
+             TEMAS INCLUIDOS
+        ====================================================== -->
+
+
+        <div class="risks-themes">
+
+
+            <h3>
+                Recibes diseños de:
+            </h3>
+
+
+
+            <div class="risks-theme-list">
+
+
+                <span>
+                    🌸 Flores
+                </span>
+
+
+                <span>
+                    🍓 Frutas
+                </span>
+
+
+                <span>
+                    ☕ Café y Cocina
+                </span>
+
+
+                <span>
+                    🐔 Gallinas
+                </span>
+
+
+                <span>
+                    🐾 Animales
+                </span>
+
+
+                <span>
+                    🍰 Postres
+                </span>
+
+
+                <span>
+                    🎄 Navidad
+                </span>
+
+
+                <span>
+                    🐰 Pascua
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+<div class="hero-buttons">
+
+  <a
+    href="#oferta"
+    class="btn-primary btn-large"
+    data-cta="riscos_ir_oferta"
+  >
+    QUIERO EMPEZAR A PINTAR
+  </a>
+
+</div>
+
     </div>
+
 
 </section>
   
@@ -1277,20 +1457,20 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
             </span>
 
             <h2 class="section-title">
-                Ahora mira qué simple es pasar cualquier diseño al
+                Ahora mira lo fácil que es pasar cualquier diseño al
                 <span>paño de cocina</span>
             </h2>
 
             <p class="section-subtitle">
                 No necesitas saber dibujar. Después de imprimir el modelo,
-                solo usa papel carbón para pasar las líneas al paño antes de comenzar a pintar.
+                solo usa papel carbónico para pasar las líneas al paño antes de comenzar a pintar.
             </p>
 
         </div>
 
         <div class="transfer-process-grid">
 
-            <!-- ETAPA 1 -->
+            <!-- PASO 1 -->
             <article class="transfer-process-card">
 
                 <div class="transfer-process-image">
@@ -1301,7 +1481,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <img
                         src="images/transferencia-01.webp"
-                        alt="Diseño impreso en una hoja A4"
+                        alt="Diseño impreso en una hoja tamaño carta"
                         loading="lazy"
                                          decoding="async"
                         width="900"
@@ -1315,15 +1495,15 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                     <h3>Imprime el diseño</h3>
 
                     <p>
-                        Elige uno de los 120 modelos e imprime el diseño
-                        en una hoja A4.
+                        Elige uno de los 120 modelos e imprime el dibujo
+                        en una hoja tamaño carta.
                     </p>
 
                 </div>
 
             </article>
 
-            <!-- ETAPA 2 -->
+            <!-- PASO 2 -->
             <article class="transfer-process-card transfer-process-card-highlight">
 
                 <div class="transfer-process-image">
@@ -1333,12 +1513,12 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                     </span>
 
                     <span class="transfer-process-badge">
-                        PAPEL CARBONO
+                        PAPEL CARBÓNICO
                     </span>
 
                     <img
                         src="images/transferencia-02.webp"
-                        alt="Papel carbón posicionado sobre el paño de cocina"
+                        alt="Papel carbónico posicionado sobre el paño de cocina"
                         loading="lazy"
                                          decoding="async"
                         width="900"
@@ -1349,18 +1529,19 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <div class="transfer-process-content">
 
-                    <h3>Posiciona el papel carbón</h3>
+                    <h3>Coloca el papel carbónico</h3>
 
                     <p>
-                        Coloca el <strong>papel carbón</strong>
-                        sobre el paño, con el lado que transfiere el dibujo en contacto con el paño.
+                        Pon el <strong>papel carbónico</strong>
+                        sobre el paño, con el lado que transfiere la marca
+                        hacia la tela.
                     </p>
 
                 </div>
 
             </article>
 
-            <!-- ETAPA 3 -->
+            <!-- PASO 3 -->
             <article class="transfer-process-card">
 
                 <div class="transfer-process-image">
@@ -1371,7 +1552,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <img
                         src="images/transferencia-03.webp"
-                        alt="Diseño impreso posicionado sobre el papel carbón y el paño de cocina"
+                        alt="Diseño impreso posicionado sobre el papel carbónico y el paño de cocina"
                         loading="lazy"
                                          decoding="async"
                         width="900"
@@ -1382,18 +1563,18 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <div class="transfer-process-content">
 
-                    <h3>Coloca el diseño por encima</h3>
+                    <h3>Coloca el diseño encima</h3>
 
                     <p>
-                        Posiciona la hoja impresa sobre el carbón y sujeta
-                        las extremidades para que el diseño no se mueva de lugar.
+                        Posiciona la hoja impresa sobre el carbónico y sujeta
+                        los extremos para que el dibujo no se mueva.
                     </p>
 
                 </div>
 
             </article>
 
-            <!-- ETAPA 4 -->
+            <!-- PASO 4 -->
             <article class="transfer-process-card">
 
                 <div class="transfer-process-image">
@@ -1404,7 +1585,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <img
                         src="images/transferencia-04.webp"
-                        alt="Persona contorneando el diseño con lápiz para transferir el dibujo a la tela"
+                        alt="Persona repasando el diseño con lápiz para transferir el dibujo a la tela"
                         loading="lazy"
                                          decoding="async"
                         width="900"
@@ -1415,18 +1596,18 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <div class="transfer-process-content">
 
-                    <h3>Contornea las líneas</h3>
+                    <h3>Repasa las líneas</h3>
 
                     <p>
                         Pasa un lápiz o una punta firme sobre las líneas
-                        del diseño para transferir el contorno al paño.
+                        del dibujo para transferir el contorno al paño.
                     </p>
 
                 </div>
 
             </article>
 
-            <!-- ETAPA 5 -->
+            <!-- PASO 5 -->
             <article class="transfer-process-card">
 
                 <div class="transfer-process-image">
@@ -1437,7 +1618,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <img
                         src="images/transferencia-05.webp"
-                        alt="Dibujo transferido al paño de cocina listo para empezar a pintar"
+                        alt="Dibujo transferido al paño de cocina listo para comenzar a pintar"
                         loading="lazy"
                                          decoding="async"
                         width="900"
@@ -1451,7 +1632,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                     <h3>Retira los papeles y pinta</h3>
 
                     <p>
-                        Retira la hoja y el carbón. El diseño quedará marcado
+                        Retira la hoja y el carbónico. El dibujo quedará marcado
                         en la tela, listo para recibir la pintura.
                     </p>
 
@@ -1474,8 +1655,8 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </strong>
 
                 <p>
-                    Recibirás orientaciones para utilizar el papel carbón
-                    y transferir los diseños, aunque nunca hayas
+                    Recibirás instrucciones para utilizar el papel carbónico
+                    y transferir los diseños, incluso si nunca has
                     hecho este proceso antes.
                 </p>
 
@@ -1488,6 +1669,278 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 </section>
 
 
+<!-- =========================================================
+     ¿PARA QUIÉN ES?
+     ========================================================= -->
+
+<section class="for-who-section bg-default fade-in">
+
+    <div class="container">
+
+        <div class="text-center for-who-heading">
+
+            <span class="section-tag">
+                Hecho para ti
+            </span>
+
+
+            <h2 class="section-title">
+                Esta colección es perfecta para quien quiere
+                <span>empezar a pintar</span>
+            </h2>
+
+
+            <p class="section-subtitle">
+                Incluso sin experiencia, tendrás modelos listos
+                y un camino simple para crear tus primeras piezas.
+            </p>
+
+        </div>
+
+
+
+        <div class="for-who-grid">
+
+
+            <article class="for-who-card">
+
+                <div class="for-who-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Estás empezando ahora
+                </h3>
+
+                <p>
+                    Para quien siempre tuvo ganas de pintar,
+                    pero nunca supo por dónde empezar.
+                </p>
+
+            </article>
+
+
+
+            <article class="for-who-card">
+
+                <div class="for-who-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    No sabes dibujar
+                </h3>
+
+                <p>
+                    Usa diseños listos para imprimir y
+                    transforma dibujos en hermosas pinturas.
+                </p>
+
+            </article>
+
+
+
+            <article class="for-who-card">
+
+                <div class="for-who-icon">
+                    💝
+                </div>
+
+                <h3>
+                    Quieres crear piezas únicas
+                </h3>
+
+                <p>
+                    Ideal para decorar tu hogar, regalar
+                    o comenzar una nueva actividad artesanal.
+                </p>
+
+            </article>
+
+
+
+        </div>
+
+
+
+        <div class="for-who-footer">
+
+    <div class="for-who-footer-icon">
+        ✓
+    </div>
+
+
+    <div class="for-who-footer-text">
+
+        <strong>
+            No necesitas nacer con talento.
+        </strong>
+
+        <span>
+            Solo necesitas un modelo adecuado y ganas de crear.
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+
+<!-- =========================================================
+     BENEFICIOS DEL PRODUCTO
+========================================================= -->
+
+<section class="benefits-section bg-white fade-in">
+
+    <div class="container">
+
+
+        <div class="text-center benefits-heading">
+
+            <span class="section-tag">
+                Lo que recibes
+            </span>
+
+
+            <h2 class="section-title">
+                Más que diseños,
+                <span>un camino para crear</span>
+            </h2>
+
+
+            <p class="section-subtitle">
+                Todo organizado para que pases de la idea
+                a transformar paños de cocina simples en hermosas piezas pintadas.
+            </p>
+
+        </div>
+
+
+
+        <div class="benefits-grid">
+
+
+            <article class="benefit-card">
+
+                <div class="benefit-icon">
+                    ✨
+                </div>
+
+                <h3>
+                    Crea sin necesidad de dibujar
+                </h3>
+
+                <p>
+                    Ten modelos listos para imprimir,
+                    transferir y comenzar tu pintura con seguridad.
+                </p>
+
+            </article>
+
+
+
+            <article class="benefit-card">
+
+                <div class="benefit-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    Ahorra tiempo buscando modelos
+                </h3>
+
+                <p>
+                    Una colección organizada con diversos temas
+                    para que elijas el dibujo ideal.
+                </p>
+
+            </article>
+
+
+
+            <article class="benefit-card">
+
+                <div class="benefit-icon">
+                    💝
+                </div>
+
+                <h3>
+                    Haz piezas para ti o para vender
+                </h3>
+
+                <p>
+                    Transforma paños de cocina en regalos,
+                    decoración o una nueva fuente de ingresos.
+                </p>
+
+            </article>
+
+
+
+            <article class="benefit-card">
+
+                <div class="benefit-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Aprende el proceso completo
+                </h3>
+
+                <p>
+                    Cuenta con el apoyo de videoclases, guías de transferencia, pintura
+                    y combinación de colores.
+                </p>
+
+            </article>
+
+
+        </div>
+
+
+
+        <div class="benefits-footer">
+
+
+    <div class="benefits-footer-icon">
+        ✓
+    </div>
+
+
+    <div class="benefits-footer-text">
+
+        <strong>
+            Recibes todo organizado para empezar.
+        </strong>
+
+        <span>
+            Elige el diseño, transfiérelo a la tela y pon tu creatividad en práctica.
+        </span>
+
+    </div>         
+
+</div>
+
+<div class="hero-buttons">
+
+  <a
+    href="#oferta"
+    class="btn-primary btn-large"
+    data-cta="o_que_recebe_ir_oferta"
+  >
+    QUIERO EMPEZAR A PINTAR
+  </a>
+
+</div>
+     
+</section>
+
+
+  
+  
     <!-- =========================================================
      BONOS EXCLUSIVOS
      ========================================================= -->
@@ -1508,7 +1961,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
             <p class="section-subtitle">
                 Materiales complementarios para facilitar tu pintura,
-                mejorar tus resultados y ayudarte a empezar
+                mejorar tus resultados y ayudarte a comenzar
                 con más seguridad.
             </p>
 
@@ -1540,10 +1993,10 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <div class="bonus-content">
 
-                    <h3>Clase en Video: Pintura en Tela desde Cero</h3>
+                    <h3>Videoclase: Pintura en Tela desde Cero</h3>
 
                     <p>
-                        Sigue en la práctica el paso a paso de la pintura en tela, desde la preparación hasta el acabado, con explicaciones simples para quien está comenzando.
+                        Acompaña en la práctica el paso a paso de la pintura en tela, desde la preparación hasta el acabado, con explicaciones simples para quien está empezando.
                     </p>
 
                 </div>
@@ -1576,7 +2029,9 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                     <h3>Guía de Transferencia Perfecta</h3>
 
                     <p>
-                        Aprende a transferir tus diseños al paño de cocina con papel carbón, evitando dibujos torcidos, fallos y marcas fuera de lugar.
+                        Aprende a transferir tus diseños al paño de cocina
+                        con papel carbónico, evitando dibujos torcidos,
+                        fallas y marcas fuera de lugar.
                     </p>
 
                 </div>
@@ -1609,9 +2064,9 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                     <h3>Guía de Combinación de Colores</h3>
 
                     <p>
-                        Receba sugestões de paletas harmoniosas para escolher
-                        tus tintas com mais facilidade e criar pinturas
-                        ainda mais bonitas.
+                        Recibe sugerencias de paletas armoniosas para elegir
+                        tus pinturas con más facilidad y crear pinturas
+                        aún más hermosas.
                     </p>
 
                 </div>
@@ -1629,7 +2084,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <img
                         src="images/bonus-vendas.webp"
-                        alt="Portada de la guía Primeros Pasos para Vender tus Creaciones"
+                        alt="Portada de la guía Primeros Pasos para Vender tus Piezas"
                         loading="lazy"
                                          decoding="async"
                         width="1000"
@@ -1640,10 +2095,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <div class="bonus-content">
 
-                    <h3>Primeros Pasos para Vender tus Creaciones</h3>
+                    <h3>Primeros Pasos para Vender tus Piezas</h3>
 
                     <p>
-                        Aprende cómo calcular precios, armar kits, divulgar tus trabajos y conquistar tus primeros clientes.
+                        Aprende cómo calcular precios, armar kits, promocionar
+                        tus trabajos y conseguir tus primeros clientes.
                     </p>
 
                 </div>
@@ -1652,7 +2108,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
         </div>
 
-        <!-- Informação final -->
+        <!-- Información final -->
         <div class="bonuses-summary">
 
             <div class="bonuses-summary-icon" aria-hidden="true">
@@ -1667,64 +2123,258 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <span>
                     Recibes los 120 diseños y los cuatro materiales extras
-                    sin pagar nada más.
+                    sin pagar nada adicional.
                 </span>
 
             </div>
 
         </div>
-
-
-<!-- =====================================================
-     CTA INTERMEDIÁRIO — APÓS OS BONO
-===================================================== -->
-
-<div class="bonuses-cta">
-
-    <div class="hero-price">
-
-    <div class="hero-price-label">
-        De <span class="price-old-inline">US$ 19.90</span>
-        por solo:
-    </div>
-
-    <div class="hero-price-current">
-        US$ 7.90
-    </div>
-
-</div>
-
-
-  <div class="urgency-banner">
-                        ⚠️ Atención: esta oferta es por tiempo limitado.
-                    </div>
-  
-
-  <div class="hero-buttons">
-  <a
-    href="https://pay.hotmart.com/D107721921W?off=mx8hdq9r"
-    class="btn-primary btn-large"
-    data-checkout-button
-    data-checkout-position="bonus"
-  >
-    QUIERO EMPEZAR A PINTAR
-  </a>
-</div>
-
-    <p class="hero-info">
-        pago único • acceso inmediato
-    </p>
-
-</div>
-
       
     </div>
 
 </section>
 
 
+ <!-- 9. SECCIÓN CTA FINAL -->
+<section class="final-cta bg-default fade-in" id="oferta">
+    <div class="container">
+        <div class="offer-box">
+
+    <h2 class="final-cta-title">
+
+        La colección completa para crear
+        hermosos paños de cocina
+        incluso empezando desde cero
+
+    </h2>
+
+<!-- MOCKUP DE LA COLECCIÓN -->
+
+<div class="offer-mockup">
+
+    <img 
+        src="images/MOCKUP_NOVO.webp"
+        alt="Colección con 120 diseños exclusivos para pintar paños de cocina"
+        width="800"
+        height="800"
+        loading="lazy"
+        decoding="async"
+    >
+
+</div>
+
+
+    <!-- ENTREGA -->
+
+    <div class="offer-delivery">
+
+
+        <div class="offer-delivery-content">
+
+<ul>
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            120 Diseños Exclusivos para Pintar Paños de Cocina
+        </span>
+
+    </li>
+
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            Videoclase: Pintura en Tela desde Cero
+        </span>
+
+    </li>
+
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            Guía de Transferencia Perfecta
+        </span>
+
+    </li>
+
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            Guía de Combinación de Colores
+        </span>
+
+    </li>
+
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            Primeros Pasos para Vender tus Piezas
+        </span>
+
+    </li>
+
+
+    <li>
+
+        <span class="benefit-icon" aria-hidden="true">
+            ✓
+        </span>
+
+        <span class="benefit-text">
+            Acceso de por vida al material
+        </span>
+
+    </li>
+
+
+</ul>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- ANCLAJE -->
+
+
+    <div class="offer-anchor">
+
+       <span> Valor de la colección completa: US$ 19,90
+        </span>
+
+
+    </div>
+
+
+
+
+
+    <!-- PRECIO -->
+
+
+    <div class="final-offer-price">
+
+
+        <div class="final-offer-label">
+
+    Oferta especial hoy 
+    <strong id="offer-date"></strong>:
+
+</div>
+
+
+
+        <div class="final-offer-current-price">
+
+            US$ 7,90
+
+        </div>
+
+
+
+
+        <div class="final-offer-installments">
+
+            Pago único
+
+            <strong>
+                — acceso inmediato
+            </strong>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- CTA -->
+
+
+    <div class="hero-buttons">
+
+
+        <a
+        href="https://pay.hotmart.com/S106956139O?checkoutMode=10"
+        class="btn-primary btn-large"
+        data-cta="oferta_checkout">
+         
+
+
+            QUIERO APROVECHAR LA OFERTA
+
+
+        </a>
+
+
+    </div>
+
+
+
+
+
+    <!-- SEGURIDAD -->
+
+
+    <div class="offer-security">
+
+
+        🔒 Compra protegida
+
+
+        <span>
+
+            Acceso inmediato después de la confirmación del pago.
+
+        </span>
+
+
+    </div>
+
+
+
+</div>
+</section>
+
+
+
+  
+
 <!-- =========================================================
-     PINTURAS DE QUEM JÁ COMEÇOU
+     PINTURAS DE QUIENES YA EMPEZARON
 ========================================================= -->
 
 <section
@@ -1733,7 +2383,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 >
 
     <!-- =====================================================
-         CABEÇALHO
+         ENCABEZADO
     ====================================================== -->
 
     <div class="customer-results-heading container text-center">
@@ -1756,13 +2406,13 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 
     <!-- =====================================================
-         CARROSSEL INFINITO
+         CARRUSEL INFINITO
     ====================================================== -->
 
     <div
         class="testimonials-marquee"
         data-testimonials-marquee
-        aria-label="Pinturas compartilhadas por clientes"
+        aria-label="Pinturas compartidas por clientas"
     >
 
         <div
@@ -1776,11 +2426,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
             <div class="testimonials-group">
 
-                <!-- DEPOIMENTO 1 -->
+                <!-- TESTIMONIO 1 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-01.webp"
-                        alt="Testimonio de cliente mostrando una pintura de rosa en paño de cocina"
+                        alt="Testimonio de clienta mostrando una pintura de rosa en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1790,11 +2440,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </figure>
 
 
-                <!-- DEPOIMENTO 2 -->
+                <!-- TESTIMONIO 2 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-02.webp"
-                        alt="Cliente mostrando una pintura de limones en paño de cocina"
+                        alt="Clienta mostrando una pintura de limones en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1804,11 +2454,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </figure>
 
 
-                <!-- DEPOIMENTO 3 -->
+                <!-- TESTIMONIO 3 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-03.webp"
-                        alt="Cliente mostrando una pintura de taza en paño de cocina"
+                        alt="Clienta mostrando una pintura de taza en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1818,11 +2468,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </figure>
 
 
-                <!-- DEPOIMENTO 4 -->
+                <!-- TESTIMONIO 4 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-04.webp"
-                        alt="Testimonio de cliente mostrando una pintura de pastel en paño de cocina"
+                        alt="Testimonio de clienta mostrando una pintura de pastel en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1832,11 +2482,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </figure>
 
 
-                <!-- DEPOIMENTO 5 -->
+                <!-- TESTIMONIO 5 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-05.webp"
-                        alt="Cliente mostrando una pintura de perro en paño de cocina"
+                        alt="Clienta mostrando una pintura de perro en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1846,11 +2496,11 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </figure>
 
 
-                <!-- DEPOIMENTO 6 -->
+                <!-- TESTIMONIO 6 -->
                 <figure class="testimonial-slide">
                     <img
                         src="images/depoimento-06.webp"
-                        alt="Testimonio de clienta principiante mostrando una pintura de plátanos en paño de cocina"
+                        alt="Testimonio de clienta principiante mostrando una pintura de bananas en paño de cocina"
                         width="391"
                         height="709"
                         loading="lazy"
@@ -1863,7 +2513,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 
             <!-- =================================================
-                 CÓPIA PARA LOOP INFINITO
+                 COPIA PARA LOOP INFINITO
             ================================================== -->
 
             <div
@@ -1951,7 +2601,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 
     <!-- =====================================================
-         OBSERVAÇÃO
+         OBSERVACIÓN
     ====================================================== -->
 
     <p class="testimonials-note">
@@ -1972,7 +2622,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
         <div class="guarantee-wrapper">
 
-            <!-- Selo principal -->
+            <!-- Sello principal -->
             <div class="guarantee-seal" aria-hidden="true">
 
                 <div class="guarantee-seal-icon">
@@ -1993,20 +2643,20 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
                 </div>
 
                 <span class="guarantee-seal-label">
-                    GARANTIA
+                    GARANTÍA
                 </span>
 
                 <strong class="guarantee-seal-days">
-                    7 DIAS
+                    7 DÍAS
                 </strong>
 
                 <span class="guarantee-seal-bottom">
-                    PARA AVALIAR
+                    PARA EVALUAR
                 </span>
 
             </div>
 
-            <!-- Conteúdo principal -->
+            <!-- Contenido principal -->
             <div class="guarantee-content">
 
                 <span class="section-tag">
@@ -2020,7 +2670,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                 <p class="guarantee-description">
                     Compra hoy, accede a los archivos y conoce los diseños y bonos
-                    incluidos en la colección. Si el material no cumple tus
+                    incluidos en la colección. Si el material no cumple con tus
                     expectativas, podrás solicitar el reembolso dentro del
                     plazo y las condiciones de la garantía.
                 </p>
@@ -2039,7 +2689,7 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
                     <li>
                         <span class="guarantee-check" aria-hidden="true">✓</span>
-                        <span>Evalúa si el material es lo que buscas.</span>
+                        <span>Evalúa si el material cumple con lo que buscas.</span>
                     </li>
 
                     <li>
@@ -2058,174 +2708,6 @@ sendMetaCapi('ViewContent', viewContentEventId, viewContentData);
 
 </section>
 
-  <!-- 9. FINAL CTA SECTION -->
-<section class="final-cta bg-default fade-in" id="oferta">
-    <div class="container">
-        <div class="offer-box">
-
-            <h2 class="final-cta-title">
-    Comienza tu primera creación hoy
-</h2>
-
-            <p class="section-subtitle">
-
-Ten acceso a los 120 diseños exclusivos,
-a la clase en video de pintura en tela desde cero
-y a los bonos que facilitarán tus primeras piezas.
-
-            </p>
-
-<ul class="hero-benefits">
-
-
-    <!-- PRODUTO PRINCIPAL -->
-    <li>
-
-        <span class="benefit-icon" aria-hidden="true">
-            🎨
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                120 Diseños Exclusivos:
-            </strong>
-
-            listos para imprimir en tamaño real, transferir al paño de cocina y empezar a pintar.
-
-        </span>
-
-    </li>
-
-
-
-    <!-- BONO 1: VIDEOAULA - DESTAQUE -->
-    <li class="bonus-benefit bonus-benefit-highlight">
-
-        <span class="benefit-icon" aria-hidden="true">
-            ▶️
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 1 - Clase en Video Pintura en Tela desde Cero:
-            </strong>
-
-            sigue el paso a paso de la pintura,
-            desde la preparación hasta el acabado, con explicaciones simples
-            para crear tus primeras piezas.
-
-        </span>
-
-    </li>
-
-
-
-    <!-- BONO 2 -->
-    <li>
-
-        <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 2 - Guía de Transferencia Perfecta:
-            </strong>
-
-            aprende a transferir tus diseños al paño de cocina con papel carbón, evitando dibujos torcidos, fallas y marcas fuera de lugar.
-
-        </span>
-
-    </li>
-
-   <!-- BONO 3 -->
-    <li>
-
-        <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 3 - Guía de Combinación de Colores:
-            </strong>
-
-            recibe sugerencias de paletas armoniosas para elegir tus pinturas con más facilidad y crear pinturas aún más bonitas.
-
-        </span>
-
-    </li>
-
-
-   <!-- BONO 4 -->
-    <li>
-
-        <span class="benefit-icon" aria-hidden="true">
-            🎁
-        </span>
-
-        <span class="benefit-text">
-
-            <strong>
-                Bono 4 - Primeros Pasos para Vender tus Creaciones:
-            </strong>
-
-            aprende cómo calcular precios, armar kits, divulgar tus trabajos y conquistar tus primeros clientes.
-
-        </span>
-
-    </li>
-
-
-  
-</ul>
-
-            
-<!-- PREÇO -->
-    <div class="hero-price">
-
-    <div class="hero-price-label">
-        De <span class="price-old-inline">US$ 19.90</span>
-        por solo:
-    </div>
-
-    <div class="hero-price-current">
-        US$ 7.90
-    </div>
-
-</div>
-
-
-          <div class="urgency-banner">
-                        ⚠️ Atención: esta oferta es por tiempo limitado.
-                    </div>
-
-
-<div class="hero-buttons">
-  <a
-    href="https://pay.hotmart.com/D107721921W?off=mx8hdq9r"
-    class="btn-primary btn-large"
-    data-checkout-button
-    data-checkout-position="final"
-  >
-    QUIERO EMPEZAR A PINTAR
-  </a>
-</div>
-
-
-<p class="hero-info">
-  pago único • acceso inmediato
-</p>
-        </div>
-    </div>
-</section>
-
-
-
 
 <!-- =========================================================
      SOBRE LA CREADORA DE LA COLECCIÓN
@@ -2238,7 +2720,7 @@ y a los bonos que facilitarán tus primeras piezas.
         <div class="creator-wrapper">
 
 
-            <!-- IMAGEM PRINCIPAL -->
+            <!-- IMAGEN PRINCIPAL -->
 
             <div class="creator-image">
 
@@ -2255,7 +2737,7 @@ y a los bonos que facilitarán tus primeras piezas.
 
 
 
-            <!-- CONTEÚDO -->
+            <!-- CONTENIDO -->
 
             <div class="creator-content">
 
@@ -2279,7 +2761,7 @@ y a los bonos que facilitarán tus primeras piezas.
 
                 <p>
                     Soy apasionada por la pintura en paños de cocina
-                    y sé lo desafiante que puede ser encontrar diseños
+                    y sé lo difícil que puede ser encontrar diseños
                     bonitos, bien definidos y listos para usar.
                 </p>
 
@@ -2287,23 +2769,23 @@ y a los bonos que facilitarán tus primeras piezas.
                 <p>
                     Por eso, creé esta colección con mucho cariño,
                     reuniendo 120 diseños exclusivos, organizados por temas,
-                    para que puedas imprimir, transferir y empezar
-                    a pintar sin perder tiempo buscando modelos por internet.
+                    para que puedas imprimir, transferir y comenzar
+                    a pintar sin perder tiempo buscando modelos en internet.
                 </p>
 
 
                 <p>
-                    Cada diseño fue seleccionado pensando en facilitar
+                    Cada dibujo fue seleccionado pensando en facilitar
                     tu día a día y ayudarte a crear piezas hermosas,
-                    ya sea por placer, para regalar o incluso
-                    para generar ingresos desde casa.
+                    ya sea para tu disfrute, para regalar o incluso
+                    para generar un ingreso extra.
                 </p>
 
 
 
                 <div class="creator-signature">
 
-                    Maria Silva
+                    María Silva
 
                     <small>
                         CREADORA DE LA COLECCIÓN<br>
@@ -2326,13 +2808,13 @@ y a los bonos que facilitarán tus primeras piezas.
 
   
 
-  <!-- 11. FAQ SECTION -->
+  <!-- 11. SECCIÓN FAQ -->
   <section class="faq bg-white fade-in" id="duvidas">
     <div class="container">
       <div class="text-center">
-        <span class="section-tag">Despeja tus Dudas</span>
+        <span class="section-tag">Resuelve tus Dudas</span>
         <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
-        <p class="section-subtitle">Respondemos las preguntas más comunes sobre el producto.</p>
+        <p class="section-subtitle">Respondemos las dudas más comunes sobre el producto.</p>
       </div>
 
       <div class="faq-list">
@@ -2343,27 +2825,27 @@ y a los bonos que facilitarán tus primeras piezas.
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>No. Este es un producto 100% digital. Recibirás los archivos en PDF para descarga inmediata tras la confirmación del pago. Nada será enviado por correo físico.</p>
+            <p>No. Este es un producto 100% digital. Recibirás los archivos en PDF para descarga inmediata después de la confirmación del pago. No se envía nada por correo postal.</p>
           </div>
         </div>
         <!-- FAQ 2 -->
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>¿Cómo recibiré los archivos?</span>
+            <span>¿Cómo recibo los archivos?</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>Tras la confirmación del pago, recibirás un correo con el enlace para la descarga inmediata de los 120 diseños en PDF.</p>
+            <p>Después de la confirmación del pago, recibirás un correo electrónico con el enlace para descargar de inmediato los 120 diseños en PDF.</p>
           </div>
         </div>
         <!-- FAQ 3 -->
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>¿Puedo imprimir los diseños varias veces?</span>
+            <span>¿Puedo imprimir cuantas veces quiera?</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>¡Sí! Después de descargarlos, los archivos son tuyos para siempre. Puedes imprimirlos cuantas veces necesites, sin costo adicional.</p>
+            <p>¡Sí! Después de la descarga, los archivos son tuyos para siempre. Puedes imprimir cuantas veces necesites, sin ningún costo adicional.</p>
           </div>
         </div>
         <!-- FAQ 4 -->
@@ -2373,33 +2855,103 @@ y a los bonos que facilitarán tus primeras piezas.
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>No. Los diseños pueden imprimirse en cualquier impresora común, de inyección de tinta o láser, en papel A4 normal.</p>
+            <p>No. Los diseños se pueden imprimir en cualquier impresora común, ya sea de inyección de tinta o láser, en papel tamaño carta.</p>
           </div>
         </div>
         <!-- FAQ 5 -->
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>¿Cómo hago la transferencia del diseño al paño?</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <span>¿Cómo transfiero el diseño al paño?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>Solo imprime el diseño, coloca el papel carbón sobre el paño de cocina, pon el diseño encima y pasa un lápiz o punzón sobre el dibujo. ¡Es muy simple!</p>
+            <p>Solo imprime el diseño, coloca el papel carbónico sobre el paño de cocina, pon el diseño encima y repasa con un lápiz o punzón sobre el dibujo. ¡Es muy simple!</p>
           </div>
         </div>
         <!-- FAQ 6 -->
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>¿El acceso es inmediato?</span>
+            <span>¿Los archivos están disponibles de inmediato?</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
           <div class="faq-answer">
-            <p>Sim! O acesso é imediato após a confirmação do pagamento. Tú já pode baixar e começar a usar na hora.</p>
+            <p>¡Sí! El acceso es inmediato después de la confirmación del pago. Puedes descargar y empezar a usar en el momento.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+
+<!-- =========================================================
+     CIERRE FINAL DE LA OFERTA
+========================================================= -->
+
+<section class="final-offer-close">
+
+    <div class="container">
+
+        <div class="final-offer-close__box">
+
+            <span class="section-tag">
+                Empieza hoy
+            </span>
+
+            <h2 class="final-offer-close__title">
+                Crea hermosos paños de cocina
+                <span>pintados por ti</span>
+                incluso empezando desde cero
+            </h2>
+         
+         
+            <p class="final-offer-close__text">
+                Ten en tus manos <strong>120 diseños exclusivos,
+                videoclase paso a paso de pintura y materiales simples</strong>
+                para transformar dibujos en hermosas piezas artesanales.
+            </p>
+
+            <a
+                href="#oferta"
+                class="btn-primary btn-large"
+                data-cta="fechamento_final_oferta"
+            >
+                QUIERO EMPEZAR A PINTAR
+            </a>
+
+<!-- AVATARES + BENEFICIO DE LOS DISEÑOS -->
+
+<div class="hero-collection-proof">
+
+    <div class="hero-collection-proof__avatars">
+
+        <img src="images/avatar1.webp" alt="">
+        <img src="images/avatar2.webp" alt="">
+        <img src="images/avatar3.webp" alt="">
+        <img src="images/avatar4.webp" alt="">
+
+    </div>
+
+
+    <p class="hero-collection-proof__text">
+
+        <strong>
+            120 diseños exclusivos
+        </strong>
+
+        para que elijas tus favoritos, los imprimas y los transformes en hermosas piezas artesanales.
+
+    </p>
+
+</div>   
+
+         
+        </div>
+
+    </div>
+
+</section>
+
+ 
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -2410,7 +2962,7 @@ y a los bonos que facilitarán tus primeras piezas.
       <h3 class="footer-brand-name">Pintura en Paños de Cocina</h3>
 
       <p>
-        120 diseños exclusivos para pintura en paño de cocina.
+        120 diseños exclusivos para pintar paños de cocina.
         Archivos digitales en PDF listos para imprimir y usar.
       </p>
     </div>
@@ -2448,7 +3000,7 @@ y a los bonos que facilitarán tus primeras piezas.
           </li>
 
           <li>
-            <a href="mailto:pinturaempañodeprato@outlook.com">
+            <a href="mailto:pinturaempanodeprato@outlook.com">
               Contacto
             </a>
           </li>
@@ -2469,7 +3021,7 @@ y a los bonos que facilitarán tus primeras piezas.
 
   
 <!-- =========================================================
-     MODAL - TERMOS DE USO
+     MODAL - TÉRMINOS DE USO
 ========================================================= -->
 
 <div
@@ -2500,46 +3052,57 @@ y a los bonos que facilitarán tus primeras piezas.
 
       <p>
         Al adquirir el producto digital
-        <strong>120 Diseños Exclusivos para Pintura en Paños de Cocina</strong>,
+        <strong>120 Diseños Exclusivos para Pintar Paños de Cocina</strong>,
         aceptas los términos presentados a continuación.
       </p>
 
       <h3>1. Producto Digital</h3>
 
       <p>
-        Este producto consiste en archivos digitales disponibles para descarga tras la confirmación del pago. Ningún producto físico será enviado.
+        Este producto consiste en archivos digitales disponibles para
+        descarga después de la confirmación del pago. No se enviará
+        ningún producto físico.
       </p>
 
       <h3>2. Uso del Material</h3>
 
       <p>
-        Los archivos están destinados al uso personal del comprador. Se permite imprimir y utilizar los diseños para la creación de piezas artesanales.
+        Los archivos están destinados al uso personal del comprador.
+        Se permite imprimir y utilizar los diseños para la creación
+        de piezas artesanales.
       </p>
 
       <h3>3. Derechos de Autor</h3>
 
       <p>
-        Queda prohibido revender, compartir, distribuir, poner a disposición o reproducir los archivos digitales como producto digital, ya sea de forma gratuita o de pago.
+        Está prohibido revender, compartir, distribuir, poner a disposición
+        o reproducir los archivos digitales como producto digital,
+        ya sea de forma gratuita o paga.
       </p>
 
       <h3>4. Acceso al Producto</h3>
 
       <p>
-        Tras la confirmación del pago, el acceso al producto estará disponible según las instrucciones enviadas por la plataforma de pago.
+        Después de la confirmación del pago, el acceso al producto será
+        habilitado conforme a las instrucciones enviadas por la
+        plataforma de pago.
       </p>
 
       <h3>5. Resultados</h3>
 
       <p>
-        Los resultados presentados pueden variar de acuerdo con la experiencia, los materiales y las técnicas utilizadas por cada persona.
+        Los resultados presentados pueden variar según
+        la experiencia, los materiales y las técnicas utilizadas
+        por cada persona.
       </p>
 
       <h3>6. Soporte</h3>
 
       <p>
-        En caso de dudas sobre el acceso al producto, contáctanos por correo electrónico a
-        <a href="mailto:pinturaempañodeprato@outlook.com">
-          pinturaempañodeprato@outlook.com
+        En caso de dudas sobre el acceso al producto,
+        comunícate por correo electrónico a
+        <a href="mailto:pinturaempanodeprato@outlook.com">
+          pinturaempanodeprato@outlook.com
         </a>.
       </p>
 
@@ -2551,7 +3114,7 @@ y a los bonos que facilitarán tus primeras piezas.
 
 
 <!-- =========================================================
-     MODAL - POLÍTICA DE PRIVACIDADE
+     MODAL - POLÍTICA DE PRIVACIDAD
 ========================================================= -->
 
 <div
@@ -2581,45 +3144,59 @@ y a los bonos que facilitarán tus primeras piezas.
     <div class="legal-modal-text">
 
       <p>
-        Esta Política de Privacidad explica de forma general cómo la información proporcionada por los usuarios puede ser utilizada durante la navegación y adquisición de este producto.
+        Esta Política de Privacidad explica de forma general cómo
+        la información proporcionada por los usuarios puede ser utilizada
+        durante la navegación y adquisición de este producto.
       </p>
 
       <h3>1. Información Recopilada</h3>
 
       <p>
-        Podemos recibir información proporcionada voluntariamente por el usuario durante el proceso de compra, como nombre, correo electrónico y otra información necesaria para el procesamiento del pedido.
+        Podemos recibir información proporcionada voluntariamente por el
+        usuario durante el proceso de compra, como nombre, correo electrónico
+        y otra información necesaria para el procesamiento del pedido.
       </p>
 
       <h3>2. Uso de la Información</h3>
 
       <p>
-        La información puede utilizarse para procesar pedidos, proporcionar acceso al producto, brindar soporte y mejorar la experiencia del usuario.
+        La información puede ser utilizada para procesar pedidos,
+        habilitar el acceso al producto, brindar soporte y mejorar
+        la experiencia del usuario.
       </p>
 
       <h3>3. Pagos</h3>
 
       <p>
-        Los pagos son procesados por la plataforma responsable de la transacción. No almacenamos directamente los datos completos de la tarjeta de pago.
+        Los pagos son procesados por la plataforma responsable
+        de la transacción. No almacenamos directamente los datos completos
+        de la tarjeta de pago.
       </p>
 
-      <h3>4. Intercambio de Información</h3>
+      <h3>4. Compartir Información</h3>
 
       <p>
-        La información personal no se vende a terceros. Los datos pueden ser compartidos solo cuando sea necesario para el funcionamiento del servicio, procesamiento del pago o cumplimiento de obligaciones legales.
+        La información personal no se vende a terceros.
+        Los datos pueden ser compartidos solo cuando sea necesario
+        para el funcionamiento del servicio, procesamiento del pago
+        o cumplimiento de obligaciones legales.
       </p>
 
       <h3>5. Cookies</h3>
 
       <p>
-        Este sitio puede utilizar cookies y tecnologías similares para mejorar la navegación, analizar el rendimiento y ayudar en la personalización de la experiencia del usuario.
+        Este sitio puede utilizar cookies y tecnologías similares
+        para mejorar la navegación, analizar el rendimiento y ayudar
+        en la personalización de la experiencia del usuario.
       </p>
 
       <h3>6. Contacto</h3>
 
       <p>
-        Si tienes dudas relacionadas con la privacidad o el uso de tu información, contáctanos por correo electrónico a
-        <a href="mailto:pinturaempañodeprato@outlook.com">
-          pinturaempañodeprato@outlook.com
+        Si tienes dudas relacionadas con la privacidad o el uso
+        de tu información, comunícate por correo electrónico a
+        <a href="mailto:pinturaempanodeprato@outlook.com">
+          pinturaempanodeprato@outlook.com
         </a>.
       </p>
 

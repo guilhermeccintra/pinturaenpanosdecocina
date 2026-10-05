@@ -1292,402 +1292,51 @@ document.addEventListener(
 );
 
 
+// ==========================================================
+// DATA DINÂMICA DA BARRA DE OFERTA + BLOCO DE PREÇO
+// ==========================================================
+
+function atualizarOferta() {
+
+    const hoje = new Date();
+
+    const dia = String(hoje.getDate()).padStart(2, '0');
+
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+
+    const ano = hoje.getFullYear();
 
 
-
-/* ==========================================================
-   CARROSSEL INFINITO — DEPOIMENTOS
-
-   Movimento controlado 100% por JavaScript.
-   Não depende de animation CSS.
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const marquee = document.querySelector(
-        "[data-testimonials-marquee]"
-    );
-
-    if (!marquee) {
-        console.warn("Carrossel: marquee não encontrado.");
-        return;
-    }
+    const dataFormatada = `${dia}/${mes}/${ano}`;
 
 
-    const track = marquee.querySelector(
-        "[data-testimonials-track]"
-    );
-
-    if (!track) {
-        console.warn("Carrossel: track não encontrado.");
-        return;
-    }
+    // BARRA SUPERIOR
+    const elemento = document.getElementById('promo-date');
 
 
-    const groups = track.querySelectorAll(
-        ".testimonials-group"
-    );
+    if (elemento) {
 
-    if (groups.length < 2) {
-        console.warn(
-            "Carrossel: são necessários dois grupos."
-        );
-        return;
-    }
-
-
-    const firstGroup = groups[0];
-
-
-    /* ======================================================
-       CONFIGURAÇÕES
-    ====================================================== */
-
-    /*
-     * Pixels por segundo.
-     *
-     * Desktop: 32
-     * Mobile: 24
-     */
-
-    let speed =
-        window.innerWidth <= 600
-            ? 24
-            : 32;
-
-
-    let position = 0;
-
-    let groupWidth = 0;
-
-    let lastTimestamp = null;
-
-    let animationFrame = null;
-
-    let paused = false;
-
-    let visible = true;
-
-
-    /* ======================================================
-       CALCULA A LARGURA EXATA DO PRIMEIRO GRUPO
-    ====================================================== */
-
-    function calculateWidth() {
-
-        groupWidth =
-            firstGroup.getBoundingClientRect().width;
+        elemento.textContent =
+        `OFERTA ESPECIAL DISPONÍVEL APENAS HOJE ${dataFormatada}`;
 
     }
 
 
-    /* ======================================================
-       APLICA POSIÇÃO
-    ====================================================== */
+    // DATA NO BLOCO DA OFERTA
+    const elementoOferta = document.getElementById('offer-date');
 
-    function render() {
 
-        track.style.transform =
-            "translate3d(" +
-            (-position) +
-            "px, 0, 0)";
+    if (elementoOferta) {
+
+        elementoOferta.textContent = dataFormatada;
 
     }
 
+}
 
-    /* ======================================================
-       LOOP PRINCIPAL
-    ====================================================== */
 
-    function animate(timestamp) {
-
-        if (lastTimestamp === null) {
-            lastTimestamp = timestamp;
-        }
-
-
-        /*
-         * Tempo decorrido entre frames.
-         */
-
-        let delta =
-            (timestamp - lastTimestamp) / 1000;
-
-
-        lastTimestamp = timestamp;
-
-
-        /*
-         * Evita salto grande quando a aba
-         * volta depois de ficar em segundo plano.
-         */
-
-        delta = Math.min(delta, 0.05);
-
-
-        if (
-            !paused &&
-            visible &&
-            groupWidth > 0
-        ) {
-
-            position += speed * delta;
-
-
-            /*
-             * LOOP INFINITO
-             *
-             * Quando percorremos exatamente
-             * a largura do primeiro grupo,
-             * voltamos uma largura.
-             *
-             * Como o segundo grupo é idêntico,
-             * visualmente nada muda.
-             */
-
-            if (position >= groupWidth) {
-
-                position =
-                    position % groupWidth;
-
-            }
-
-
-            render();
-
-        }
-
-
-        animationFrame =
-            requestAnimationFrame(animate);
-
-    }
-
-
-    /* ======================================================
-       DESKTOP — PAUSA NO HOVER
-    ====================================================== */
-
-    const canHover =
-        window.matchMedia(
-            "(hover: hover) and (pointer: fine)"
-        );
-
-
-    if (canHover.matches) {
-
-        marquee.addEventListener(
-            "mouseenter",
-            function () {
-
-                paused = true;
-
-            }
-        );
-
-
-        marquee.addEventListener(
-            "mouseleave",
-            function () {
-
-                paused = false;
-
-                /*
-                 * Reinicia referência temporal
-                 * para não causar salto.
-                 */
-
-                lastTimestamp = null;
-
-            }
-        );
-
-    }
-
-
-    /* ======================================================
-       PAUSA QUANDO A ABA FICA OCULTA
-    ====================================================== */
-
-    document.addEventListener(
-        "visibilitychange",
-        function () {
-
-            if (document.hidden) {
-
-                paused = true;
-
-            } else {
-
-                paused = false;
-
-                lastTimestamp = null;
-
-            }
-
-        }
-    );
-
-
-    /* ======================================================
-       INTERSECTION OBSERVER
-       Economiza processamento fora da tela.
-    ====================================================== */
-
-    if ("IntersectionObserver" in window) {
-
-        const observer =
-            new IntersectionObserver(
-
-                function (entries) {
-
-                    entries.forEach(
-                        function (entry) {
-
-                            visible =
-                                entry.isIntersecting;
-
-                            lastTimestamp = null;
-
-                        }
-                    );
-
-                },
-
-                {
-                    root: null,
-
-                    /*
-                     * Começa a mover antes
-                     * de entrar totalmente na tela.
-                     */
-
-                    rootMargin:
-                        "250px 0px 250px 0px",
-
-                    threshold: 0
-                }
-
-            );
-
-
-        observer.observe(marquee);
-
-    }
-
-
-    /* ======================================================
-       RESIZE
-    ====================================================== */
-
-    let resizeTimer = null;
-
-
-    window.addEventListener(
-        "resize",
-        function () {
-
-            clearTimeout(resizeTimer);
-
-
-            resizeTimer =
-                setTimeout(
-                    function () {
-
-                        /*
-                         * Atualiza velocidade
-                         * desktop/mobile.
-                         */
-
-                        speed =
-                            window.innerWidth <= 600
-                                ? 24
-                                : 32;
-
-
-                        calculateWidth();
-
-
-                        /*
-                         * Mantém posição dentro
-                         * do intervalo válido.
-                         */
-
-                        if (groupWidth > 0) {
-
-                            position =
-                                position % groupWidth;
-
-                        } else {
-
-                            position = 0;
-
-                        }
-
-
-                        render();
-
-                        lastTimestamp = null;
-
-                    },
-                    150
-                );
-
-        },
-        {
-            passive: true
-        }
-    );
-
-
-    /* ======================================================
-       INICIALIZAÇÃO
-    ====================================================== */
-
-    function init() {
-
-        calculateWidth();
-
-
-        if (groupWidth <= 0) {
-
-            /*
-             * Caso raro em que o layout ainda
-             * não foi calculado.
-             */
-
-            requestAnimationFrame(init);
-
-            return;
-
-        }
-
-
-        position = 0;
-
-        render();
-
-
-        if (animationFrame === null) {
-
-            animationFrame =
-                requestAnimationFrame(animate);
-
-        }
-
-    }
-
-
-    /*
-     * requestAnimationFrame garante que o navegador
-     * tenha realizado pelo menos um ciclo de layout.
-     */
-
-    requestAnimationFrame(init);
-
-});
-
-
+// EXECUTA AO CARREGAR A PÁGINA
+atualizarOferta();
 
 /* ==========================================================
    FIM DO SCRIPT.JS
